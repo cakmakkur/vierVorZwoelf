@@ -1,0 +1,39 @@
+@import "variables";
+@import "responsive";
+
+.menubar {
+  &__main {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    height: 45px;
+    place-items: end;
+    padding-right: 20px;
+    @include S {
+      grid-template-columns: 70px 1fr;
+    }
+  }
+  &__nav__wrapper {
+    & ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+      & li {
+        margin: 0px 25px;
+        transition: 0.15s ease-in;
+        font-size: 1.2rem;
+        @include S {
+          margin: 0px 10px;
+        }
+        &:hover {
+          transform: scale(1.1);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.trial {
+  font-family: "Noto Music", sans-serif;
+  color: red;
+}

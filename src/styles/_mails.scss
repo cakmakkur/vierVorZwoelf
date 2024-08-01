@@ -1,0 +1,163 @@
+@import "responsive";
+@import "variables";
+
+.mails {
+  &__main {
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    overflow: hidden;
+    padding-top: 25px;
+  }
+}
+
+.mails__nav {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 20;
+  background-color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.161);
+  & span {
+    padding: 0px 20px;
+  }
+}
+
+.nav__item--hl {
+  color: $highlight;
+  font-weight: 900;
+  text-decoration: underline;
+}
+
+.mails__display {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  column-gap: 15px;
+}
+
+.bandMails__display {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  column-gap: 15px;
+  &__main {
+    padding: 15px 10px;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 150px;
+    & form {
+      display: flex;
+      flex-direction: column;
+      row-gap: 15px;
+      & textarea {
+        height: 100px;
+        resize: none;
+      }
+      & button {
+        height: 30px;
+        width: 100px;
+      }
+    }
+  }
+  &__li {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+}
+
+.mails__sidebar {
+  // background-color: blue;
+  position: relative;
+  & ul {
+    & li {
+      padding: 10px;
+      &:hover {
+        cursor: pointer;
+        background-color: $highlight;
+      }
+    }
+  }
+}
+.mails__selector {
+  position: absolute;
+  width: 140px;
+  height: 44px;
+  top: 0;
+  transition: 0.3s ease-out;
+  background-color: rgba(241, 154, 83, 0.222);
+  pointer-events: none;
+  @include S {
+    height: 44px;
+    width: 100%;
+    top: 0;
+  }
+}
+
+// -------   NEW MAIL    -------
+.newMail {
+  &__main {
+    width: 100%;
+    padding-top: 15px;
+    padding-right: 15px;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding-bottom: 15px;
+    & select {
+      width: 200px;
+    }
+    & textarea {
+      resize: none;
+      height: 43vh;
+    }
+    & button {
+      width: 100px;
+    }
+  }
+}
+
+// -------   INBOX and SENT    -------
+
+.inbox {
+  &__main {
+    width: 100%;
+  }
+  &__table {
+    width: 100%;
+    padding-right: 10px;
+    &__thead {
+      width: 100%;
+      & tr {
+        padding: 7px 0px;
+        font-size: 1.1rem;
+        text-align: left;
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.243);
+        & td {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          padding-right: 10px;
+        }
+      }
+    }
+    &__tbody {
+      text-align: left;
+      & tr {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.181);
+        & td {
+          padding-right: 10px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}

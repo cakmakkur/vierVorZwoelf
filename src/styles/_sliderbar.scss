@@ -1,0 +1,57 @@
+@import "variables";
+
+.sliderbar__container {
+  width: 40px;
+  height: 20px;
+  border: none;
+  position: relative;
+}
+
+.slider__mid {
+  z-index: 10;
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 244);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  position: relative;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.circle__l {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  z-index: 4;
+}
+
+.circle__r {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  z-index: 5;
+}
+
+.slider__ball {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background-color: $highlight;
+  border: none;
+  z-index: 15;
+  transition: 0.2s ease-out;
+  pointer-events: none;
+}

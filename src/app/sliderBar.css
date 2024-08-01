@@ -1,0 +1,27 @@
+.sliderbar__container {
+  width: 190px;
+  height: 40px;
+  border: none;
+  background-color: rgb(140, 175, 150);
+  position: relative;
+}
+
+.circle__l {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: rgb(98, 255, 0);
+}
+
+.circle__r {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: rgb(174, 41, 134);
+}

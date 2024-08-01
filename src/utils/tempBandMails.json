@@ -1,0 +1,23 @@
+[
+  {
+    "id": "2300020",
+    "sender": "abc@hotmail.com",
+    "subject": "Gig offer",
+    "message": "Yo guys, I have a new offer for you. You can play in our bar on 24th Sep. 400€ for the gig and free beers all night. Let me know if you are in till next week. Joe.",
+    "time": "18.07.2024"
+  },
+  {
+    "id": "849923033",
+    "sender": "bookings@jazzclub.com",
+    "subject": "Friday Night Gig",
+    "message": "Hello, we are looking to book your band for a gig at our jazz club on the 1st of November. The gig will pay 350€ and we will provide a complimentary dinner and drinks for the band members. Let us know if you are available. Cheers, Jazz Club Booking Team.",
+    "time": "22.07.2024"
+  },
+  {
+    "id": "0084662",
+    "sender": "sam.musicevents@gmail.com",
+    "subject": "New Year’s Eve Event",
+    "message": "Greetings, we are organizing a special New Year’s Eve event and we would love to have your band perform. The event will be held on the 31st of December and the payment is 800€. Additionally, we will provide a luxurious stay at a nearby hotel. Please let us know your decision by the 10th of August. Regards, Sam.",
+    "time": "24.07.2024"
+  }
+]
