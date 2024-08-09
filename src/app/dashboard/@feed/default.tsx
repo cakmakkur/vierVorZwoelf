@@ -30,12 +30,16 @@ export default function Feed() {
   useEffect(() => {
     const scrollToBottom = () => {
       if (messageEndRef.current) {
-        messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+        messageEndRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "start",
+        });
       }
     };
     if (windowWidth > 860) {
       // this if statement needs to be changed.
-      // bug: it scrolls to the hidden feed secreen in mobile width
+      // bug: it scrolls to the hidden feed screen in mobile width
       scrollToBottom();
     }
   }, [feedData]);

@@ -23,7 +23,7 @@ export default function Page() {
         style={{
           zIndex: "50",
           fontSize: "2.2rem",
-          margin: "25px 0px",
+          margin: "0px 0px 25px",
           display: "flex",
           justifyContent: "center",
         }}

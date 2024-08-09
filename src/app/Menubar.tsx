@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { useState } from "react";
-import { useRef } from "react";
+import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 
 export const Menubar = () => {
   const intervalRef = useRef<number | null>(null);
@@ -22,15 +21,11 @@ export const Menubar = () => {
       chars2[parseFloat((Math.random() * (chars2.length - 1)).toFixed(0))];
     return randomChar;
   };
-
   const switchFont = (navItems: string[]): void => {
     intervalRef.current = window.setInterval(() => {
       let newNavItemsArray = navItems.map((item) => {
         let newStrArray: String[] = [];
         const originalItemLetters = Array.from(item);
-        // for (let i = 0; i < item.length; i++) {
-        //   newStrArray.push(randomChar());
-        // }
         const randomIndex = parseFloat(
           (Math.random() * (originalItemLetters.length - 1)).toFixed(0)
         );
@@ -47,7 +42,7 @@ export const Menubar = () => {
       });
 
       setNavItems(newNavItemsArray);
-    }, 85);
+    }, 80);
   };
 
   useEffect(() => {
@@ -81,7 +76,15 @@ export const Menubar = () => {
 
   return (
     <div className="menubar__main">
-      <div className="bandLogo">LOGO</div>
+      <div className="bandLogo">
+        <Image
+          className="bandLogo__img"
+          width={55}
+          height={55}
+          alt="band logo"
+          src="/logo.webp"
+        />
+      </div>
       <div className="menubar__nav__wrapper">
         <ul>
           {navItems.map((item, i) => (

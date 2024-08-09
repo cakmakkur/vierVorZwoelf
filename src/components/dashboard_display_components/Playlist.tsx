@@ -6,6 +6,7 @@ import PlistCard from "../dashboard_subcomponents/PlistCard";
 import axiosPublic from "@/utils/axiosPublic";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import PlistEdit from "../dashboard_subcomponents/PlistEdit";
 
 interface PlaylistType {
   id: string;
@@ -17,7 +18,7 @@ const Playlist = () => {
   // const [playlists, setPlaylists] = useState<undefined | PlaylistType>(
   //   undefined
   // );
-  const [hasFetchFailed, setHasFetchFailed] = useState<boolean>(false);
+  // const [hasFetchFailed, setHasFetchFailed] = useState<boolean>(false);
   const [selectedPlistId, setSelectedPlistId] = useState<string | undefined>(
     undefined
   );
@@ -82,6 +83,11 @@ const Playlist = () => {
           />
         ))}
       </div>
+      {/* Edit page / pop up */}
+      <PlistEdit
+        setSelectedPlistId={setSelectedPlistId}
+        initialPlaylist={pList.filter((p) => p.id === selectedPlistId)}
+      />
     </div>
   );
 };

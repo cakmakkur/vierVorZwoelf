@@ -5,9 +5,9 @@
   &__main {
     display: grid;
     grid-template-columns: 100px 1fr;
-    height: 45px;
+    height: 70px;
     place-items: end;
-    padding-right: 20px;
+    padding: 0 20px 10px;
     @include S {
       grid-template-columns: 70px 1fr;
     }
@@ -36,4 +36,8 @@
 .trial {
   font-family: "Noto Music", sans-serif;
   color: red;
+}
+
+.bandLogo__img {
+  border-radius: 50%;
 }

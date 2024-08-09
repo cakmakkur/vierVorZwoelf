@@ -66,12 +66,16 @@ ul {
   padding-top: 75px;
 }
 
+input:focus {
+  outline: none;
+}
+
 .menubar__main {
   display: grid;
   grid-template-columns: 100px 1fr;
-  height: 45px;
+  height: 70px;
   place-items: end;
-  padding-right: 20px;
+  padding: 0 20px 10px;
 }
 @media (max-width: 860px) {
   .menubar__main {
@@ -103,10 +107,17 @@ ul {
   color: red;
 }
 
+.bandLogo__img {
+  border-radius: 50%;
+}
+
 .footer {
-  position: absolute;
-  bottom: 0;
   z-index: 50;
+  background-color: rgb(0, 18, 88);
+  color: white;
+  width: 100%;
+  margin-top: 25px;
+  height: 50px;
 }
 
 .dashboard__main {
@@ -204,7 +215,7 @@ ul {
 
 .feed__loading {
   width: 280px;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 170px);
   padding: 10px;
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.289);
   border-radius: 3px;
@@ -223,6 +234,7 @@ ul {
   row-gap: 20px;
   transition: 0.2s ease-out;
   transform: translateX(0);
+  overflow: hidden;
 }
 @media (max-width: 860px) {
   .feed__main {
@@ -319,10 +331,15 @@ ul {
 }
 .playlists__body {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   place-items: center;
   column-gap: 10px;
   row-gap: 50px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+@media (max-width: 1140px) {
+  .playlists__body {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 .playlists__card {
   position: relative;
@@ -424,6 +441,236 @@ ul {
   .playlists__searchbar button {
     transform: translateX(30vw);
   }
+}
+
+.plistEdit__main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 150;
+  transition: 0.15s;
+  transform: scale(0);
+  display: flex;
+  justify-content: center;
+}
+.plistEdit--active {
+  transform: scale(1);
+}
+.plistEdit__display {
+  width: 76.9230769231vh;
+  height: 100vh;
+  background-color: white;
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.309);
+  padding: 35px;
+  display: grid;
+  grid-template-rows: 70px 1fr 50px 50px;
+  row-gap: 20px;
+}
+.plistEdit__title__label {
+  font-weight: 700;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.087);
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+.plistEdit__title__input {
+  width: 100%;
+  font-weight: 500;
+  font-size: 1rem;
+}
+.plistEdit__closeBtn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: none;
+  background: none;
+  border-radius: 50%;
+  transition: 0.15s;
+  padding: 3px;
+}
+.plistEdit__closeBtn:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.274);
+}
+.plistEdit__songs {
+  overflow-y: scroll;
+  position: relative;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.087);
+  border-radius: 3px;
+}
+.plistEdit__songs::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.393);
+  z-index: 1000;
+}
+.plistEdit__song {
+  height: 35px;
+  display: grid;
+  grid-template-columns: 1fr 40px 22px;
+  align-items: center;
+  column-gap: 5px;
+  transition: 0.15s;
+  padding: 0px 10px;
+}
+.plistEdit__song:hover {
+  background-color: rgb(219, 235, 242);
+  cursor: pointer;
+}
+.plistEdit__song__name--input {
+  border: none;
+  padding: 0;
+  background-color: lightblue;
+}
+.plistEdit__song__sort {
+  border-left: 1px solid rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+}
+.plistEdit__song__sort img {
+  transition: 0.15s;
+}
+.plistEdit__song__sort img:hover {
+  background-color: #d4ebf2;
+}
+.plistEdit__song__del {
+  position: relative;
+}
+.plistEdit__song__del__confirmBox {
+  font-weight: 600;
+  position: absolute;
+  top: -3px;
+  right: 0;
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: rgb(255, 255, 246);
+  width: 150px;
+  transition: 0.15s;
+  transform: scale(0);
+  text-align: center;
+  padding: 5px;
+  z-index: 1000;
+  cursor: default;
+}
+.plistEdit__song__del__confirmBox button {
+  margin: 5px 5px;
+  cursor: pointer;
+  border: 1px solid black;
+  transition: 0.15s;
+}
+.plistEdit__song__del__confirmBox button:nth-child(2):hover {
+  background-color: rgb(206, 255, 206);
+}
+.plistEdit__song__del__confirmBox button:nth-child(3):hover {
+  background-color: rgba(255, 0, 0, 0.403);
+}
+.plistEdit__song__del__confirmBox--active {
+  transform: scale(1);
+}
+.plistEdit__song__del img {
+  transition: 0.15s;
+}
+.plistEdit__song__del img:hover {
+  transform: scale(1.15);
+}
+.plistEdit__addNewSong {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  column-gap: 15px;
+  position: relative;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.087);
+}
+.plistEdit__addNewSong::before, .plistEdit__addNewSong::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.393);
+  z-index: 1000;
+}
+.plistEdit__addNewSong::after {
+  bottom: 0;
+}
+.plistEdit__addNewSong button {
+  border: none;
+  background: none;
+  padding: 0;
+}
+.plistEdit__addNewSong button:hover {
+  cursor: pointer;
+}
+.plistEdit__addNewSong input {
+  height: 100%;
+  border: none;
+  padding: 0;
+}
+.plistEdit__options {
+  display: flex;
+  justify-content: space-between;
+}
+.plistEdit__options button {
+  transition: 0.15s;
+  position: relative;
+}
+.plistEdit__options button:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.22);
+}
+.plistEdit__options--left button {
+  margin-right: 10px;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+.plistEdit__options--left button:nth-child(1) {
+  background-color: rgb(241, 249, 255);
+}
+.plistEdit__options--left button:nth-child(1):hover {
+  background-color: #bee3ff;
+}
+.plistEdit__options--left button:nth-child(2) {
+  background-color: rgb(255, 240, 228);
+}
+.plistEdit__options--left button:nth-child(2):hover {
+  background-color: #ffd4b1;
+}
+.plistEdit__options--left button:nth-child(3) {
+  background-color: rgb(238, 255, 234);
+}
+.plistEdit__options--left button:nth-child(3):hover {
+  background-color: #c5ffb7;
+}
+.plistEdit__options--right button {
+  border-radius: 3px;
+  border: 1px solid black;
+  background-color: rgb(255, 240, 240);
+}
+.plistEdit__options--right button:hover {
+  background-color: #ffbdbd;
+}
+
+.playlistEdit__tooltip {
+  position: absolute;
+  left: -23px;
+  bottom: -27px;
+  width: 100px;
+  opacity: 0;
+  transition: 0.3s;
+  z-index: 1000;
+  border: 1px solid black;
+  background-color: rgb(255, 254, 245);
+  font-size: 0.8rem;
+}
+.playlistEdit__tooltip--open {
+  opacity: 0.8;
 }
 
 .mails__main {
