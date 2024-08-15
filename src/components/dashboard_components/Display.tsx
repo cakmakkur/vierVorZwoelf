@@ -1,4 +1,5 @@
 import React, { Suspense, lazy } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const AccountSettings = lazy(
   () => import("../dashboard_display_components/AccountSettings")
@@ -38,6 +39,20 @@ export default function Display({
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>{renderComponent()}</Suspense>
+    <Suspense
+      fallback={
+        <div style={{ width: "100%", height: "100%" }}>
+          <ClipLoader
+            color="blue"
+            loading={true}
+            size={50}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      }
+    >
+      {renderComponent()}
+    </Suspense>
   );
 }

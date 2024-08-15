@@ -1,9 +1,8 @@
 "use client";
+
 import ClipLoader from "react-spinners/ClipLoader";
 import React from "react";
-import { useRef } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
 interface DataType {
   time: String;
@@ -38,8 +37,6 @@ export default function Feed() {
       }
     };
     if (windowWidth > 860) {
-      // this if statement needs to be changed.
-      // bug: it scrolls to the hidden feed screen in mobile width
       scrollToBottom();
     }
   }, [feedData]);

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const DATABASE_URI = process.env.MONGODB_URI;
+const DATABASE_URI = process.env.DATABASE_URI;
 
 if (!DATABASE_URI) {
   throw new Error(
@@ -30,6 +30,7 @@ async function connectToDatabase() {
     };
 
     cached.promise = mongoose.connect(DATABASE_URI, opts).then((mongoose) => {
+      console.log('Connected to MongoDB');
       return mongoose;
     });
   }
