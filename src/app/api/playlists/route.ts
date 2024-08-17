@@ -61,3 +61,24 @@ export async function DELETE(request: NextRequest) {
     headers: { "Content-Type": "application/json" },
   });
 }
+
+export async function PUT(request: NextRequest) {
+  await connectToDatabase();
+  const { _id, name, songs } = await request.json();
+  try {
+    const playlist = await Playlist.findByIdAndUpdate(_id, {
+      name,
+      songs,
+    });
+    return new Response(JSON.stringify("Playlist updated successfully"), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (err) {
+    console.error("Failed to update playlist:", err);
+  }
+  return new Response(JSON.stringify({ error: "Failed to update playlist" }), {
+    status: 500,
+    headers: { "Content-Type": "application/json" },
+  });
+}

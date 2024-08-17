@@ -235,41 +235,6 @@
     }
     &__del {
       position: relative;
-      &__confirmBox {
-        font-weight: 600;
-        position: absolute;
-        top: -3px;
-        right: 0;
-        border: 1px solid black;
-        border-radius: 3px;
-        background-color: rgb(255, 255, 246);
-        width: 150px;
-        transition: 0.15s;
-        transform: scale(0);
-        text-align: center;
-        padding: 5px;
-        z-index: 1000;
-        cursor: default;
-        & button {
-          margin: 5px 5px;
-          cursor: pointer;
-          border: 1px solid black;
-          transition: 0.15s;
-          &:nth-child(2) {
-            &:hover {
-              background-color: rgb(206, 255, 206);
-            }
-          }
-          &:nth-child(3) {
-            &:hover {
-              background-color: rgba(255, 0, 0, 0.403);
-            }
-          }
-        }
-        &--active {
-          transform: scale(1);
-        }
-      }
       & img {
         transition: 0.15s;
         &:hover {
@@ -375,4 +340,69 @@
   &--open {
     opacity: 0.8;
   }
+}
+
+.plistEdit__saveBtn,
+.plistEdit__delBtn {
+  position: relative;
+}
+
+.plistEdit__confirmBox {
+  font-weight: 600;
+  position: absolute;
+  top: -3px;
+  right: 0;
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: rgb(255, 255, 246);
+  width: 150px;
+  transition: 0.15s;
+  text-align: center;
+  padding: 5px;
+  z-index: 1000;
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  cursor: default;
+  & button {
+    margin: 5px 5px;
+    cursor: pointer;
+    border: 1px solid black;
+    transition: 0.15s;
+    &:nth-child(2) {
+      &:hover {
+        background-color: rgb(206, 255, 206);
+      }
+    }
+    &:nth-child(3) {
+      &:hover {
+        background-color: rgba(255, 0, 0, 0.403);
+      }
+    }
+  }
+  &__delsong--active {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  &__delplist,
+  &__saveplist {
+    top: -50px;
+  }
+  &__saveplist--active,
+  &__delplist--active {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.plistEdit__notification {
+  position: absolute;
+  bottom: 0;
+}
+
+.plistEdit__notification {
+  color: green;
+  font-weight: 600;
 }

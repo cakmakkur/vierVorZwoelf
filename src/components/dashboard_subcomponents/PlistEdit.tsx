@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, FormEvent } from "react";
 import Image from "next/image";
+import { jsPDF } from "jspdf";
 
 interface PlaylistType {
   _id: string;
@@ -30,6 +31,13 @@ export default function PlistEdit({
   const [toggleDelConfirm, setToggleDelConfirm] = useState<number | undefined>(
     undefined
   );
+  const [toggleDelPlistConfirm, setToggleDelPlistConfirm] =
+    useState<boolean>(false);
+  const [toggleSavePlistConfirm, setToggleSavePlistConfirm] =
+    useState<boolean>(false);
+  const [toggleActionNotification, setToggleActionNotification] =
+    useState<boolean>(false);
+  const notificationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [newSong, setNewSong] = useState<string>("");
   const [tooltip, setTooltip] = useState("");
   const tooltipTimeoutRef = useRef<number | NodeJS.Timeout | null>(null);
@@ -110,7 +118,7 @@ export default function PlistEdit({
     setPlaylist(newUpdatedPlaylist);
     setToggleDelConfirm(undefined);
   };
-  // delete
+
   const handleDeletePlaylist = async () => {
     try {
       const response = await fetch("/api/playlists/", {
@@ -131,6 +139,67 @@ export default function PlistEdit({
       throw new Error("Failed to delete the playlist");
     }
   };
+
+  const handleSaveChanges = async () => {
+    if (!initialPlaylist?.length) return;
+    try {
+      const response = await fetch("/api/playlists/", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedPlaylist),
+      });
+      if (!response.ok) {
+        console.log("Failed to update playlist");
+        throw new Error("Failed to update the playlist");
+      }
+      handleActionNotification();
+      setPlaylists((prev) => {
+        if (!prev) return;
+        const index = prev.findIndex((list) => list._id === playlist?._id);
+        if (index !== undefined && updatedPlaylist) {
+          prev[index] = updatedPlaylist;
+        }
+        return prev;
+      });
+    } catch (err) {
+      console.log("Failed to update playlist");
+      throw new Error("Failed to update the playlist");
+    }
+  };
+
+  //PDF FUNCTION
+  function generatePDF() {
+    if (!updatedPlaylist) return;
+    const doc = new jsPDF();
+    // Add title
+    doc.setFontSize(18);
+    doc.text("Playlist", 10, 10);
+    // Add playlist name
+    doc.setFontSize(14);
+    doc.text(`Name: ${updatedPlaylist.name}`, 10, 20);
+    // Add songs
+    doc.setFontSize(12);
+    updatedPlaylist.songs.forEach((song, index) => {
+      doc.text(`${index + 1}. ${song}`, 10, 30 + index * 10);
+    });
+    // Save the PDF
+    doc.save(`${updatedPlaylist.name}.pdf`);
+  }
+
+  //NOTIFICATION FUNCTIONS
+  const handleActionNotification = () => {
+    setToggleActionNotification(true);
+    notificationTimeoutRef.current = setTimeout(() => {
+      setToggleActionNotification(false);
+    }, 3000);
+  };
+  useEffect(() => {
+    return () => {
+      if (notificationTimeoutRef.current) {
+        clearTimeout(notificationTimeoutRef.current);
+      }
+    };
+  }, []);
 
   //TOOLTIP FUNCTIONS
   const handleMouseOver = (param: string) => {
@@ -219,9 +288,9 @@ export default function PlistEdit({
                     onClick={() => handleToggleDelConfirm(i)}
                   />
                   <div
-                    className={`plistEdit__song__del__confirmBox ${
+                    className={`plistEdit__confirmBox ${
                       toggleDelConfirm === i
-                        ? "plistEdit__song__del__confirmBox--active"
+                        ? "plistEdit__confirmBox__delsong--active"
                         : ""
                     }`}
                   >
@@ -267,6 +336,7 @@ export default function PlistEdit({
               onMouseOut={handleMouseOut}
               className="plistEdit__display__downloadBtn"
               disabled={playlist !== updatedPlaylist}
+              onClick={() => generatePDF()}
             >
               <Image
                 src="/download_icon.png"
@@ -304,6 +374,8 @@ export default function PlistEdit({
             <button
               onMouseOver={() => handleMouseOver("save")}
               onMouseOut={handleMouseOut}
+              onClick={() => setToggleSavePlistConfirm(!toggleSavePlistConfirm)}
+              className="plistEdit__saveBtn"
             >
               <Image
                 src="/save_icon.png"
@@ -318,13 +390,32 @@ export default function PlistEdit({
               >
                 Save Changes
               </span>
+              <div
+                className={`plistEdit__confirmBox plistEdit__confirmBox__saveplist ${
+                  toggleSavePlistConfirm
+                    ? "plistEdit__confirmBox__saveplist--active"
+                    : ""
+                }`}
+              >
+                Are you sure you want to save the changes?
+                <br />
+                <button
+                  onClick={() =>
+                    setToggleSavePlistConfirm(!toggleSavePlistConfirm)
+                  }
+                >
+                  No
+                </button>
+                <button onClick={() => handleSaveChanges()}>Yes</button>
+              </div>
             </button>
           </div>
           <div className="plistEdit__options--right">
             <button
               onMouseOver={() => handleMouseOver("delete")}
               onMouseOut={handleMouseOut}
-              onClick={() => handleDeletePlaylist()}
+              onClick={() => setToggleDelPlistConfirm(!toggleDelPlistConfirm)}
+              className="plistEdit__delBtn"
             >
               <Image
                 src="/delete_icon.png"
@@ -339,9 +430,32 @@ export default function PlistEdit({
               >
                 Delete Playlist
               </span>
+              <div
+                className={`plistEdit__confirmBox plistEdit__confirmBox__delplist ${
+                  toggleDelPlistConfirm
+                    ? "plistEdit__confirmBox__delplist--active"
+                    : ""
+                }`}
+              >
+                Are you sure you want to delete the playlist?
+                <br />
+                <button
+                  onClick={() =>
+                    setToggleDelPlistConfirm(!toggleDelPlistConfirm)
+                  }
+                >
+                  No
+                </button>
+                <button onClick={handleDeletePlaylist}>Yes</button>
+              </div>
             </button>
           </div>
         </div>
+        {toggleActionNotification ? (
+          <p className="plistEdit__notification">Changes saved...</p>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
