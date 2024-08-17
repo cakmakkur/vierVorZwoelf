@@ -1,61 +1,46 @@
 "use client";
 
 import React from "react";
-import pList from "@/utils/tempPlist.json";
 import PlistCard from "../dashboard_subcomponents/PlistCard";
-import axiosPublic from "@/utils/axiosPublic";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import PlistEdit from "../dashboard_subcomponents/PlistEdit";
 
 interface PlaylistType {
-  id: string;
+  _id: string;
   name: string;
   songs: string[];
 }
 
 const Playlist = () => {
-  // const [playlists, setPlaylists] = useState<undefined | PlaylistType>(
-  //   undefined
-  // );
-  // const [hasFetchFailed, setHasFetchFailed] = useState<boolean>(false);
+  const [playlists, setPlaylists] = useState<undefined | PlaylistType[]>(
+    undefined
+  );
+  const [hasFetchFailed, setHasFetchFailed] = useState<boolean>(false);
+
   const [selectedPlistId, setSelectedPlistId] = useState<string | undefined>(
     undefined
   );
 
   useEffect(() => {
-    console.log("selected id: " + selectedPlistId);
-  }, [selectedPlistId]);
-
-  // useEffect(() => {
-  //   async function fetchPlaylists() {
-  //     try {
-  //       const response = await axiosPublic.get("/route");
-  //       const data = response.data;
-  //       if (!data.length) {
-  //         setHasFetchFailed(true);
-  //         throw new Error("Failed to fetch the playlists");
-  //       }
-  //       setPlaylists(data);
-  //     } catch (err) {
-  //       alert("Failed to fetch the playlists");
-  //     }
-  //   }
-  //   fetchPlaylists();
-  // }, []);
-
-  // // delete
-  const deletePlaylist = async (id: string) => {
-    try {
-      const response = await axiosPublic.delete(`/route/${id}`);
-      if (response.status !== 200) {
-        throw new Error("Failed to delete the playlist");
-        alert("Failed to delete the playlist");
+    async function fetchPlaylists() {
+      try {
+        const response = await fetch("/api/playlists");
+        if (!response.ok) {
+          throw new Error("Failed to fetch playlists");
+        }
+        const data = await response.json();
+        if (!data.length) {
+          setHasFetchFailed(true);
+          throw new Error("Failed to fetch the playlists");
+        }
+        setPlaylists(data);
+      } catch (err) {
+        alert("Failed to fetch the playlists");
       }
-    } catch (err) {
-      alert("Failed to delete the playlist");
     }
-  };
+    fetchPlaylists();
+  }, []);
 
   return (
     <div className="playlists__main display__component">
@@ -74,19 +59,19 @@ const Playlist = () => {
       </div>
       <div className="playlists__body">
         <PlistCard />
-        {pList.map((list, i) => (
+        {playlists?.map((list, i) => (
           <PlistCard
             key={i}
             setSelectedPlistId={setSelectedPlistId}
-            deletePlaylist={deletePlaylist}
             playlist={list}
           />
         ))}
       </div>
       {/* Edit page / pop up */}
       <PlistEdit
+        setPlaylists={setPlaylists}
         setSelectedPlistId={setSelectedPlistId}
-        initialPlaylist={pList.filter((p) => p.id === selectedPlistId)}
+        initialPlaylist={playlists?.filter((p) => p._id === selectedPlistId)}
       />
     </div>
   );

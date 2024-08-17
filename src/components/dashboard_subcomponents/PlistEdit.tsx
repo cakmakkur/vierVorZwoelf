@@ -4,7 +4,7 @@ import { useEffect, useState, useRef, FormEvent } from "react";
 import Image from "next/image";
 
 interface PlaylistType {
-  id: string;
+  _id: string;
   name: string;
   songs: string[];
 }
@@ -12,11 +12,15 @@ interface PlaylistType {
 interface PropTypes {
   initialPlaylist?: PlaylistType[];
   setSelectedPlistId: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setPlaylists: React.Dispatch<
+    React.SetStateAction<undefined | PlaylistType[]>
+  >;
 }
 
 export default function PlistEdit({
   initialPlaylist,
   setSelectedPlistId,
+  setPlaylists,
 }: PropTypes) {
   const [playlist, setPlaylist] = useState<PlaylistType | undefined>(undefined);
   const [updatedPlaylist, setUpdatedPlaylist] = useState<
@@ -105,6 +109,27 @@ export default function PlistEdit({
     setUpdatedPlaylist(newUpdatedPlaylist);
     setPlaylist(newUpdatedPlaylist);
     setToggleDelConfirm(undefined);
+  };
+  // delete
+  const handleDeletePlaylist = async () => {
+    try {
+      const response = await fetch("/api/playlists/", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: playlist?._id }),
+      });
+      if (!response.ok) {
+        console.log("Failed to delete playlist");
+        throw new Error("Failed to delete the playlist");
+      }
+      handleCloseEdit();
+      setPlaylists(
+        (prev) => prev?.filter((list) => list._id !== playlist?._id)
+      );
+    } catch (err) {
+      console.log("Failed to delete playlist");
+      throw new Error("Failed to delete the playlist");
+    }
   };
 
   //TOOLTIP FUNCTIONS
@@ -299,6 +324,7 @@ export default function PlistEdit({
             <button
               onMouseOver={() => handleMouseOver("delete")}
               onMouseOut={handleMouseOut}
+              onClick={() => handleDeletePlaylist()}
             >
               <Image
                 src="/delete_icon.png"

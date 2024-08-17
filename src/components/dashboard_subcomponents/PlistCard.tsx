@@ -4,19 +4,14 @@ import { useRef } from "react";
 
 interface PropTypes {
   setSelectedPlistId?: React.Dispatch<React.SetStateAction<string | undefined>>;
-  deletePlaylist?: (id: string) => void;
   playlist?: {
-    id: string;
+    _id: string;
     name: String;
     songs: String[];
   };
 }
 
-export default function PlistCard({
-  playlist,
-  deletePlaylist,
-  setSelectedPlistId,
-}: PropTypes) {
+export default function PlistCard({ playlist, setSelectedPlistId }: PropTypes) {
   const delBtnRef = useRef<HTMLDivElement>(null);
 
   const handleMouseEnter = () => {
@@ -26,12 +21,6 @@ export default function PlistCard({
   const handleMouseLeave = () => {
     if (!delBtnRef.current) return;
     delBtnRef.current.style.display = "none";
-  };
-
-  const handleDeleteCart = (id: string) => {
-    if (deletePlaylist) {
-      deletePlaylist(id);
-    }
   };
 
   const handleEditPlaylist = (id: string) => {
@@ -51,16 +40,9 @@ export default function PlistCard({
       <div
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onClick={() => handleEditPlaylist(playlist.id)}
+        onClick={() => handleEditPlaylist(playlist._id)}
         className="playlists__card"
       >
-        <div
-          onClick={() => handleDeleteCart(playlist.id)}
-          ref={delBtnRef}
-          className="delete__btn__wrapper"
-        >
-          X
-        </div>
         <ol>
           {playlist.songs.map((p, i) => (
             <li key={i}>{p}</li>

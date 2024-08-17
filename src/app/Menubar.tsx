@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import AccountDropdown from "@/components/menubar_components/AccountDropdown";
 
 export const Menubar = () => {
   const intervalRef = useRef<number | null>(null);
@@ -90,6 +91,7 @@ export const Menubar = () => {
           {navItems.map((item, i) => (
             <li key={i}>{item}</li>
           ))}
+          <AccountDropdown />
         </ul>
       </div>
     </div>

@@ -13,9 +13,6 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // const { db } = await connectToDatabase();
-        // const user = await db.collection("users").findOne({ username: credentials.username });
-
         await connectToDatabase();
         const user = await User.findOne({ username: credentials.username }).exec()
 
@@ -42,6 +39,7 @@ const handler = NextAuth({
       if (token) {
         session.user.id = token.id;
         session.user.email = token.email;
+        session.user.username = token.username
       }
       return session;
     },
@@ -49,6 +47,8 @@ const handler = NextAuth({
       if (user) {
         token.id = user.id;
         token.email = user.email;
+        token.username = user.username
+
       }
       return token;
     },
