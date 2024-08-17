@@ -84,72 +84,62 @@ export default function Feed() {
           {
             time: "Yesterday",
             id: "1",
-            name: "Google Pixel 6 Pro",
+            name: "Have a great day!",
           },
           {
             time: "1 day ago",
             id: "2",
-            name: "Apple iPhone 12 Mini, 256GB, Blue",
+            name: "This is a random message",
           },
           {
             time: "Yesterday",
             id: "3",
-            name: "Apple iPhone 12 Pro Max",
+            name: "Randomize everything",
           },
           {
             time: "30min ago",
             id: "4",
-            name: "Apple iPhone 11, 64GB",
+            name: "Stay positive",
           },
           {
-            time: "2 day ago",
+            time: "Yesterday",
             id: "5",
-            name: "Samsung Galaxy Z Fold2",
+            name: "Have a great day!",
           },
           {
             time: "1 day ago",
             id: "6",
-            name: "Apple AirPods",
-          },
-          {
-            time: "30min ago",
-            id: "7",
-            name: "Apple MacBook Pro 16",
+            name: "This is a random message",
           },
           {
             time: "Yesterday",
+            id: "7",
+            name: "Randomize everything",
+          },
+          {
+            time: "30min ago",
             id: "8",
-            name: "Apple Watch Series 8",
+            name: "Stay positive",
           },
           {
-            time: "30min ago",
-
+            time: "Yesterday",
             id: "9",
-            name: "Beats Studio3 Wireless",
+            name: "Have a great day!",
           },
           {
-            time: "20 min ago",
-
+            time: "1 day ago",
             id: "10",
-            name: "Apple iPad Mini 5th Gen",
+            name: "This is a random message",
           },
           {
-            time: "3 hours ago",
-
+            time: "Yesterday",
             id: "11",
-            name: "Apple iPad Mini 5th Gen",
+            name: "Randomize everything",
           },
           {
             time: "30min ago",
-
             id: "12",
-            name: "Apple iPad Air",
-          },
-          {
-            time: "30min ago",
-
-            id: "13",
-            name: "Apple iPad Air",
+            name: "Stay positive",
           },
         ]);
         resolve("Resolved");
