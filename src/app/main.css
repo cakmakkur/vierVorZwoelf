@@ -572,6 +572,9 @@ input:focus {
 .plistEdit__addNewSong button:hover {
   cursor: pointer;
 }
+.plistEdit__addNewSong button:disabled {
+  cursor: auto;
+}
 .plistEdit__addNewSong input {
   height: 100%;
   border: none;
@@ -588,6 +591,9 @@ input:focus {
 .plistEdit__options button:hover {
   cursor: pointer;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.22);
+}
+.plistEdit__options button:disabled {
+  cursor: not-allowed;
 }
 .plistEdit__options--left button {
   margin-right: 10px;

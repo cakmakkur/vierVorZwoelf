@@ -269,6 +269,9 @@
       &:hover {
         cursor: pointer;
       }
+      &:disabled {
+        cursor: auto;
+      }
     }
     & input {
       height: 100%;
@@ -285,6 +288,9 @@
       &:hover {
         cursor: pointer;
         box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.22);
+      }
+      &:disabled {
+        cursor: not-allowed;
       }
     }
     &--left {

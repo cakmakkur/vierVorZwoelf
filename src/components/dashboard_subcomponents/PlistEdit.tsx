@@ -4,6 +4,11 @@ import { useEffect, useState, useRef, FormEvent } from "react";
 import Image from "next/image";
 import { jsPDF } from "jspdf";
 
+// TODO
+// CREATE NEW PLAYLIST FUNCTIONALITY
+// SEARCH PLAYLIST FUNCTIONALITY
+// save revert fuctionality // disable logic bug
+
 interface PlaylistType {
   _id: string;
   name: string;
@@ -312,7 +317,7 @@ export default function PlistEdit({
           className="plistEdit__addNewSong"
           onSubmit={(e) => handleAddNewSong(e)}
         >
-          <button type="submit">
+          <button disabled={newSong.length === 0} type="submit">
             <Image
               width={50}
               height={50}
@@ -356,6 +361,7 @@ export default function PlistEdit({
               onMouseOver={() => handleMouseOver("revert")}
               onMouseOut={handleMouseOut}
               onClick={handleRevertChanges}
+              disabled={initialPlaylist === updatedPlaylist}
             >
               <Image
                 src="/undo_icon.png"
@@ -376,6 +382,7 @@ export default function PlistEdit({
               onMouseOut={handleMouseOut}
               onClick={() => setToggleSavePlistConfirm(!toggleSavePlistConfirm)}
               className="plistEdit__saveBtn"
+              disabled={initialPlaylist === updatedPlaylist}
             >
               <Image
                 src="/save_icon.png"
