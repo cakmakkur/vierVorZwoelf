@@ -5,9 +5,8 @@ import Image from "next/image";
 import { jsPDF } from "jspdf";
 
 // TODO
-// CREATE NEW PLAYLIST FUNCTIONALITY
-// SEARCH PLAYLIST FUNCTIONALITY
-// save revert fuctionality // disable logic bug
+
+// SAVE SONGS UI YES BUTTON GREEN
 
 interface PlaylistType {
   _id: string;
@@ -59,11 +58,24 @@ export default function PlistEdit({
     const newUpdatedPlaylist = { ...updatedPlaylist, name };
     setUpdatedPlaylist(newUpdatedPlaylist);
   };
+
   const handleCloseEdit = () => {
     setPlaylist(undefined);
     setSelectedPlistId(undefined);
     setToggledSong("");
   };
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === "Escape" || event.key === "Esc") {
+        handleCloseEdit();
+      }
+    };
+    document.addEventListener("keydown", handleEsc);
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, []);
+
   const handleToggleSong = (song: string) => {
     setToggledSong(song);
   };
@@ -361,7 +373,6 @@ export default function PlistEdit({
               onMouseOver={() => handleMouseOver("revert")}
               onMouseOut={handleMouseOut}
               onClick={handleRevertChanges}
-              disabled={initialPlaylist === updatedPlaylist}
             >
               <Image
                 src="/undo_icon.png"
@@ -382,7 +393,6 @@ export default function PlistEdit({
               onMouseOut={handleMouseOut}
               onClick={() => setToggleSavePlistConfirm(!toggleSavePlistConfirm)}
               className="plistEdit__saveBtn"
-              disabled={initialPlaylist === updatedPlaylist}
             >
               <Image
                 src="/save_icon.png"

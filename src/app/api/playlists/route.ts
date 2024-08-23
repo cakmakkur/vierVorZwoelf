@@ -23,13 +23,23 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   await connectToDatabase();
-  const { name, songs } = await request.json();
-  console.log("name" + name);
-  console.log("songs" + songs);
+  // const { name, songs } = await request.json();
+  let name = "New Playlist";
+  const existing = await Playlist.findOne({ name });
+  if (existing) {
+    for (let i = 1; i < 100; i++) {
+      const newName = `${name} #${i + 1}`;
+      const newPlaylist = await Playlist.findOne({ name: newName });
+      if (!newPlaylist) {
+        name = newName;
+        break;
+      }
+    }
+  }
   try {
     const playlist = await Playlist.create({
       name,
-      songs,
+      songs: [],
     });
     return new Response(JSON.stringify("Playlist created successfully"), {
       status: 200,

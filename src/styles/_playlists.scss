@@ -1,4 +1,5 @@
 @import "responsive";
+@import "variables";
 
 .display__component {
   border-top: 1px solid rgba(0, 0, 0, 0.206);
@@ -110,6 +111,9 @@
   & input {
     width: 40vw;
     height: 30px;
+    border-radius: 7px;
+    border: 1px solid rgb(142, 142, 142);
+    padding: 0px 15px;
     @include S {
       width: 70vw;
     }
@@ -123,6 +127,12 @@
     position: absolute;
     padding-top: 3px;
     transform: translateX(18vw);
+    border-left: 1px solid rgba(142, 142, 142, 0);
+    transition: 0.15s;
+    cursor: pointer;
+    &:hover {
+      border-left: 1px solid rgb(142, 142, 142);
+    }
     @include S {
       transform: translateX(30vw);
     }
@@ -326,6 +336,18 @@
         &:hover {
           background-color: darken(rgb(255, 240, 240), 10%);
         }
+        &:nth-child(2) {
+          background-color: rgb(238, 255, 234);
+          &:hover {
+            background-color: darken(rgb(238, 255, 234), 10%);
+          }
+        }
+        &:nth-child(3) {
+          background-color: rgb(255, 240, 228);
+          &:hover {
+            background-color: darken(rgb(255, 240, 228), 10%);
+          }
+        }
       }
     }
   }
@@ -375,16 +397,16 @@
     cursor: pointer;
     border: 1px solid black;
     transition: 0.15s;
-    &:nth-child(2) {
-      &:hover {
-        background-color: rgb(206, 255, 206);
-      }
-    }
-    &:nth-child(3) {
-      &:hover {
-        background-color: rgba(255, 0, 0, 0.403);
-      }
-    }
+    // &:nth-child(2) {
+    //   &:hover {
+    //     background-color: rgb(206, 255, 206);
+    //   }
+    // }
+    // &:nth-child(3) {
+    //   &:hover {
+    //     background-color: rgba(255, 0, 0, 0.403);
+    //   }
+    // }
   }
   &__delsong--active {
     transform: scale(1);
@@ -411,4 +433,21 @@
 .plistEdit__notification {
   color: green;
   font-weight: 600;
+}
+
+.playlists__main--failed {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+  & button {
+    border: 1px solid black;
+    &:hover {
+      background-color: $primary-orange;
+      cursor: pointer;
+    }
+  }
 }

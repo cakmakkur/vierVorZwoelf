@@ -48,7 +48,6 @@ export default function MailsDisplay({
               Willi
             </option>
           </select>
-          <input type="text" />
           <input type="text" placeholder="Subject" />
           <textarea placeholder="Message" name="mailBody" id=""></textarea>
           <button>SEND</button>

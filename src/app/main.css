@@ -417,6 +417,9 @@ input:focus {
 .playlists__searchbar input {
   width: 40vw;
   height: 30px;
+  border-radius: 7px;
+  border: 1px solid rgb(142, 142, 142);
+  padding: 0px 15px;
 }
 @media (max-width: 860px) {
   .playlists__searchbar input {
@@ -431,6 +434,12 @@ input:focus {
   position: absolute;
   padding-top: 3px;
   transform: translateX(18vw);
+  border-left: 1px solid rgba(142, 142, 142, 0);
+  transition: 0.15s;
+  cursor: pointer;
+}
+.playlists__searchbar button:hover {
+  border-left: 1px solid rgb(142, 142, 142);
 }
 @media (max-width: 860px) {
   .playlists__searchbar button {
@@ -626,6 +635,18 @@ input:focus {
 .plistEdit__options--right button:hover {
   background-color: #ffbdbd;
 }
+.plistEdit__options--right button:nth-child(2) {
+  background-color: rgb(238, 255, 234);
+}
+.plistEdit__options--right button:nth-child(2):hover {
+  background-color: #c5ffb7;
+}
+.plistEdit__options--right button:nth-child(3) {
+  background-color: rgb(255, 240, 228);
+}
+.plistEdit__options--right button:nth-child(3):hover {
+  background-color: #ffd4b1;
+}
 
 .playlistEdit__tooltip {
   position: absolute;
@@ -672,12 +693,6 @@ input:focus {
   border: 1px solid black;
   transition: 0.15s;
 }
-.plistEdit__confirmBox button:nth-child(2):hover {
-  background-color: rgb(206, 255, 206);
-}
-.plistEdit__confirmBox button:nth-child(3):hover {
-  background-color: rgba(255, 0, 0, 0.403);
-}
 .plistEdit__confirmBox__delsong--active {
   transform: scale(1);
   opacity: 1;
@@ -700,6 +715,23 @@ input:focus {
 .plistEdit__notification {
   color: green;
   font-weight: 600;
+}
+
+.playlists__main--failed {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+}
+.playlists__main--failed button {
+  border: 1px solid black;
+}
+.playlists__main--failed button:hover {
+  background-color: rgba(255, 184, 61, 0.717);
+  cursor: pointer;
 }
 
 .mails__main {
