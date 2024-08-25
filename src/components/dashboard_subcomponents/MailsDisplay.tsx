@@ -1,110 +1,85 @@
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+import userMailMatcher from "@/utils/userMailMatcher";
+import { lazy } from "react";
+
+const Inbox = lazy(() => import("@/components/dashboard_subcomponents/Inbox"));
+const Sent = lazy(() => import("@/components/dashboard_subcomponents/Sent"));
 
 export default function MailsDisplay({
   selectedOption,
 }: {
   selectedOption: string;
 }) {
-  const [selectedRecipient, setSelectedRecipient] = useState<
-    string | undefined
-  >(undefined);
+  const { data: session, status } = useSession();
+  const sender = userMailMatcher(session?.user?.email) || undefined;
+
+  const [selectedRecipient, setSelectedRecipient] = useState<string>("");
+  const [subject, setSubject] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+
+  const handleSendNewMail = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (selectedRecipient === "") return;
+    try {
+      const response = await fetch("/api/personal_mails/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sender,
+          recipient: selectedRecipient,
+          subject,
+          message,
+        }),
+      });
+      if (!response.ok) {
+        console.log("Failed to send mail");
+        throw new Error("Failed to send mail");
+      }
+      setSelectedRecipient("");
+      setSubject("");
+      setMessage("");
+    } catch (error) {
+      console.log("Mail could not be send" + error);
+    }
+  };
 
   if (selectedOption === "New Mail") {
     return (
       <div className="newMail__main">
         <form className="newMail__form" action="">
-          <select id="mailSelect">
-            <option onChange={() => setSelectedRecipient(undefined)} value="">
-              -Select Recipient-
-            </option>
-            <option
-              onChange={() => setSelectedRecipient("David")}
-              value={"David"}
-            >
-              David
-            </option>
-            <option
-              onChange={() => setSelectedRecipient("Georg")}
-              value={"Georg"}
-            >
-              Georg
-            </option>
-            <option
-              onChange={() => setSelectedRecipient("Kürsat")}
-              value={"Kürsat"}
-            >
-              Kürsat
-            </option>
-            <option
-              onChange={() => setSelectedRecipient("Lukas")}
-              value={"Lukas"}
-            >
-              Lukas
-            </option>
-            <option
-              onChange={() => setSelectedRecipient("Willi")}
-              value={"Willi"}
-            >
-              Willi
-            </option>
+          <select
+            onChange={(e) => setSelectedRecipient(e.target.value)}
+            id="mailSelect"
+            value={selectedRecipient}
+          >
+            <option value={""}>-Select Recipient-</option>
+            <option value={"David"}>David</option>
+            <option value={"Georg"}>Georg</option>
+            <option value={"Kürsat"}>Kürsat</option>
+            <option value={"Lukas"}>Lukas</option>
+            <option value={"Willi"}>Willi</option>
           </select>
-          <input type="text" placeholder="Subject" />
-          <textarea placeholder="Message" name="mailBody" id=""></textarea>
-          <button>SEND</button>
+          <input
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            type="text"
+            placeholder="Subject"
+          />
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Message"
+            name="mailBody"
+            id=""
+          ></textarea>
+          <button onClick={(e) => handleSendNewMail(e)}>SEND</button>
         </form>
       </div>
     );
   } else if (selectedOption === "Inbox") {
-    return (
-      <div className="inbox__main">
-        <table className="inbox__table">
-          <thead className="inbox__table__thead">
-            <tr>
-              <th>Sender</th>
-              <th>Subject</th>
-            </tr>
-          </thead>
-          <tbody className="inbox__table__tbody">
-            <tr>
-              <td style={{ fontWeight: "600", color: "gray" }}>Kürsi</td>
-              <td>About the stuff I asked...</td>
-            </tr>
-            <tr>
-              <td style={{ fontWeight: "600", color: "gray" }}>Sabriña</td>
-              <td>This and that</td>
-            </tr>
-            <tr>
-              <td style={{ fontWeight: "600", color: "gray" }}>
-                Herr Kredithai
-              </td>
-              <td>Where is my money, man???</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
+    return <Inbox />;
   } else {
-    return (
-      <div className="inbox__main">
-        <table className="inbox__table">
-          <thead className="inbox__table__thead">
-            <tr>
-              <th>To</th>
-              <th>Subject</th>
-            </tr>
-          </thead>
-          <tbody className="inbox__table__tbody">
-            <tr>
-              <td style={{ fontWeight: "600", color: "gray" }}>
-                Herr Kredithai
-              </td>
-              <td>
-                Man, I got your money. Like almost.. I need some more time man!!
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
+    return <Sent />;
   }
 }

@@ -13,6 +13,11 @@ const Mails = () => {
   );
   const [isPersonal, setIsPersonal] = useState<boolean>(true);
 
+  // set the display back to "new mail" after switching between personal and band
+  useEffect(() => {
+    setSelectedOption("New Mail");
+  }, [isPersonal]);
+
   const handleClick = (component: string) => {
     setSelectedOption(component);
   };
@@ -64,9 +69,7 @@ const Mails = () => {
               })}
             </ul>
           </div>
-          <div>
-            <MailsDisplay selectedOption={selectedOption} />
-          </div>
+          <MailsDisplay selectedOption={selectedOption} />
         </div>
       ) : (
         <div className="bandMails__display">
@@ -92,15 +95,10 @@ const Mails = () => {
             if (m.id === selectedBandMail) {
               return (
                 <div key={m.id} className="bandMails__display__main">
+                  <div className="bandMails__display__sender">
+                    From: <span>{m.sender}</span>
+                  </div>
                   <div className="bandMails__display__message">{m.message}</div>
-                  <form action="">
-                    <textarea
-                      placeholder="Reply"
-                      name="text"
-                      className="bandMails__display__reply"
-                    />
-                    <button>Send</button>
-                  </form>
                 </div>
               );
             } else {

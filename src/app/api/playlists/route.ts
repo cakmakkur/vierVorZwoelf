@@ -1,6 +1,5 @@
 import connectToDatabase from "@/lib/mongodb";
 import Playlist from "@/models/Playlist";
-import exp from "constants";
 import { NextRequest } from "next/server";
 
 export async function GET() {

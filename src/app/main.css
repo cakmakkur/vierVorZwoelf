@@ -130,6 +130,17 @@ input:focus {
   }
 }
 
+.display__component {
+  border-top: 1px solid rgba(0, 0, 0, 0.206);
+  padding-top: 10px;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.235);
+  border-radius: 3px;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 30px;
+  overflow: hidden;
+}
+
 .dashboardSidebar__main {
   height: 100%;
   transition: 0.2s ease-out;
@@ -303,16 +314,6 @@ input:focus {
 .feed__message__body h6 {
   font-weight: 500;
   color: gray;
-}
-
-.display__component {
-  border-top: 1px solid rgba(0, 0, 0, 0.206);
-  padding-top: 10px;
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.235);
-  border-radius: 3px;
-  width: 100%;
-  height: 100%;
-  padding-bottom: 30px;
 }
 
 .playlists__main {
@@ -771,24 +772,18 @@ input:focus {
   grid-template-columns: 200px 1fr;
   column-gap: 15px;
 }
+.bandMails__display__sender {
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.233);
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+.bandMails__display__sender span {
+  font-weight: 500;
+}
 .bandMails__display__main {
   padding: 15px 10px;
   height: 100%;
-  display: grid;
-  grid-template-rows: 1fr 150px;
-}
-.bandMails__display__main form {
-  display: flex;
-  flex-direction: column;
-  row-gap: 15px;
-}
-.bandMails__display__main form textarea {
-  height: 100px;
-  resize: none;
-}
-.bandMails__display__main form button {
-  height: 30px;
-  width: 100px;
 }
 .bandMails__display__li {
   text-overflow: ellipsis;
@@ -799,6 +794,8 @@ input:focus {
 
 .mails__sidebar {
   position: relative;
+  z-index: 500;
+  background-color: white;
 }
 .mails__sidebar ul li {
   padding: 10px;
@@ -845,20 +842,32 @@ input:focus {
 }
 .newMail__form button {
   width: 100px;
+  border: 1px solid black;
+  border-radius: 3px;
+  transition: 0.15s;
+}
+.newMail__form button:hover {
+  cursor: pointer;
+  background-color: rgba(255, 184, 61, 0.717);
 }
 
 .inbox__main {
-  width: 100%;
+  width: 200%;
+  height: 100%;
+  transition: 0.3s ease-out;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 .inbox__table {
   width: 100%;
-  padding-right: 10px;
+  height: 100%;
+  padding-right: 15px;
 }
 .inbox__table__thead {
   width: 100%;
 }
 .inbox__table__thead tr {
-  padding: 7px 0px;
+  padding: 7px 10px;
   font-size: 1.1rem;
   text-align: left;
   display: grid;
@@ -875,6 +884,7 @@ input:focus {
   text-align: left;
 }
 .inbox__table__tbody tr {
+  padding-left: 10px;
   display: grid;
   grid-template-columns: 150px 1fr;
   border-bottom: 1px solid rgba(0, 0, 0, 0.181);
@@ -884,6 +894,75 @@ input:focus {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+.inbox__body {
+  width: 100%;
+  height: 100%;
+}
+.inbox__body__main {
+  display: grid;
+  grid-template-rows: 1fr 150px;
+  width: 100%;
+  height: 100%;
+  row-gap: 15px;
+  padding: 15px 10px;
+}
+.inbox__body__main__top {
+  display: grid;
+  grid-template-rows: 40px 40px 1fr;
+}
+.inbox__body__main__top div:nth-child(1), .inbox__body__main__top div:nth-child(2) {
+  position: relative;
+  font-weight: 600;
+}
+.inbox__body__main__top div:nth-child(1) span, .inbox__body__main__top div:nth-child(2) span {
+  font-weight: 500;
+}
+.inbox__body__main__top div:nth-child(1) img, .inbox__body__main__top div:nth-child(2) img {
+  position: absolute;
+  right: 15px;
+  top: 0;
+}
+.inbox__body__main__top div:nth-child(1) img:hover, .inbox__body__main__top div:nth-child(2) img:hover {
+  cursor: pointer;
+}
+.inbox__body__main__top div:nth-child(2) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.181);
+  padding-bottom: 15px;
+}
+.inbox__body__main__top div:nth-child(3) {
+  margin-top: 15px;
+  overflow-y: scroll;
+}
+.inbox__body__main form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+.inbox__body__main form textarea {
+  height: 100px;
+  resize: none;
+  padding: 4px;
+}
+.inbox__body__main form button {
+  height: 30px;
+  width: 100px;
+  border: 1px solid black;
+  border-radius: 3px;
+  transition: 0.15s;
+}
+.inbox__body__main form button:hover {
+  cursor: pointer;
+  background-color: rgba(255, 184, 61, 0.717);
+}
+
+.inbox__individualMail:hover {
+  background-color: rgb(219, 235, 242);
+  cursor: pointer;
+}
+
+.inbox--mailSelected {
+  transform: translateX(calc(-50% - 15px));
 }
 
 .sliderbar__container {
