@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import Welcome from "../dashboard_display_components/Welcome";
 
 const AccountSettings = lazy(
   () => import("../dashboard_display_components/AccountSettings")
@@ -34,7 +35,7 @@ export default function Display({
       case "sheetMusic":
         return <SheetMusic />;
       default:
-        return <h1>Default Display</h1>;
+        return <Welcome />;
     }
   };
 

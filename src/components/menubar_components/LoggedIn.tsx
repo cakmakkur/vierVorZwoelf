@@ -1,6 +1,8 @@
 "use client";
+
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface propTypes {
   setDropdownState: React.Dispatch<React.SetStateAction<string>>;
@@ -32,23 +34,44 @@ export default function LoggedIn({
       <div className="profileTn">{getInitialLetter()}</div>
       <h5>{session.user.email}</h5>
       <h3>Hello {session.user.username}</h3>
-      <label htmlFor="subscribe">
-        <input
-          type="checkbox"
-          id="subscribe"
-          name="subscribe"
-          checked={true}
-          // onChange={(e) => setIsSubscribed(e.target.checked)}
-        />
-        Subscribe to newsletter
-        <div
-          onClick={() => {
-            setIsDropdownOpen(false);
-            setDropdownState("login");
-            signOut({ callbackUrl: "/" });
-          }}
-          className="signout__div"
+      {session && session.user.role === "User" && (
+        <label htmlFor="subscribe">
+          <input
+            type="checkbox"
+            id="subscribe"
+            name="subscribe"
+            checked={true}
+            // onChange={(e) => setIsSubscribed(e.target.checked)}
+          />
+          Subscribe to newsletter
+        </label>
+      )}
+
+      {session && session.user.role === "Admin" && (
+        <Link
+          onClick={() => setIsDropdownOpen(false)}
+          className="go-to-dashboard"
+          href="/dashboard"
         >
+          <Image
+            src="/dashboard_icon.png"
+            width={20}
+            height={20}
+            alt="link to dashboard"
+            style={{ display: "inline-block" }}
+          />{" "}
+          Go to Dashboard
+        </Link>
+      )}
+      <div
+        onClick={() => {
+          setIsDropdownOpen(false);
+          setDropdownState("login");
+          signOut({ callbackUrl: "/" });
+        }}
+        className="signout__div"
+      >
+        <div className="go-to-dashboard">
           <Image
             style={{ display: "inline-block" }}
             width={20}
@@ -58,7 +81,7 @@ export default function LoggedIn({
           />
           <span>Logout</span>
         </div>
-      </label>
+      </div>
     </div>
   );
 }

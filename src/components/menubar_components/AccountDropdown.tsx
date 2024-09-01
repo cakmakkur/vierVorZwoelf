@@ -6,6 +6,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Login from "@/components/menubar_components/Login";
 import Signup from "@/components/menubar_components/Signup";
 import SignedUp from "./SignedUp";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const LoggedIn = lazy(() => import("@/components/menubar_components/LoggedIn"));
 
@@ -13,17 +15,32 @@ export default function AccountDropdown() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [dropdownState, setDropdownState] = useState("login");
 
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      console.log("session", session.user);
+      const expiresAt = new Date(session.expires).getTime();
+      const now = Date.now();
+      if (now >= expiresAt) {
+        setDropdownState("login");
+      } else {
+        setDropdownState("loggedIn");
+      }
+    }
+  }, [session]);
+
   return (
     <>
-      <li>
-        <Image
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          width={25}
-          height={25}
-          alt="menubar account icon"
-          src="/menubar_account_icon.png"
-        />
-      </li>
+      <Image
+        id="menubar__account__icon"
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        width={25}
+        height={25}
+        alt="menubar account icon"
+        src="/menubar_account_icon.png"
+        className="menubar__account__icon"
+      />
       {isDropdownOpen ? (
         <div
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}

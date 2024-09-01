@@ -1,6 +1,6 @@
 import connectToDatabase from "@/lib/mongodb";
 import Mail from "@/models/mail";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   await connectToDatabase();
@@ -38,9 +38,9 @@ export async function POST(request: NextRequest) {
   await connectToDatabase();
   const { sender, recipient, subject, message, parentId, threadId } = await request.json();
 
-  if (!parentId) {
-    // create new mail
-    try {
+  try {
+    if (!parentId) {
+      // Create new mail
       const newMail = new Mail({
         sender,
         recipient,
@@ -50,40 +50,31 @@ export async function POST(request: NextRequest) {
       const savedMail = await newMail.save();
       savedMail.threadId = savedMail._id;
       await savedMail.save();
-      return new Response(JSON.stringify("Mail sent"), {
+      return new NextResponse(JSON.stringify("Mail sent"), {
         status: 200,
         headers: { "Content-Type": "application/json" },
       });
-    } catch (err) {
-      console.error("Mail could not be sent", err);
-      return new Response(JSON.stringify({err: "Sending mail failed"})), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
-    }
-  } else {
-    // create a reply
-    const replyMail = new Mail({
-      sender,
-      recipient,
-      subject,
-      message,
-      threadId,
-      parentId,
-    })
-    try {
+    } else {
+      // Create a reply
+      const replyMail = new Mail({
+        sender,
+        recipient,
+        subject,
+        message,
+        threadId,
+        parentId,
+      });
       await replyMail.save();
-      return new Response(JSON.stringify("Mail sent"), {
+      return new NextResponse(JSON.stringify("Mail sent"), {
         status: 200,
         headers: { "Content-Type": "application/json" },
       });
     }
-    catch (err) {
-      console.error("Mail could not be sent", err);
-      return new Response(JSON.stringify({err: "Sending mail failed"})), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
-    }
+  } catch (err) {
+    console.error("Mail could not be sent", err);
+    return new NextResponse(JSON.stringify({ err: "Sending mail failed" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }

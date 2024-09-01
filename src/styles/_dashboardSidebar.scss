@@ -14,7 +14,6 @@
       width: 100vw;
       transform: translateX(-100vw);
       background-color: gray;
-      z-index: 20;
     }
     & ul {
       z-index: 100;
@@ -42,10 +41,6 @@
     }
   }
 }
-
-// .dashboardSidebar__icon {
-//   padding-top: 15px;
-// }
 
 .nav__toggle__btn {
   width: 40px;

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import Image from "next/image";
 import AccountDropdown from "@/components/menubar_components/AccountDropdown";
+import Link from "next/link";
 
 export const Menubar = () => {
   const intervalRef = useRef<number | null>(null);
@@ -12,9 +12,11 @@ export const Menubar = () => {
   const [navItems, setNavItems] = useState<String[]>([
     "We",
     "Gallery",
+    "VierVorZwoelf",
     "Gigs",
     "Contact",
   ]);
+  const navLinks = ["we", "gallery", "/", "gigs", "contact"];
 
   const randomChar = (): String => {
     const chars2 = ["a", "b", "c", "d", "e", "f", "p", "h", "z", "m", "k"];
@@ -47,13 +49,13 @@ export const Menubar = () => {
   };
 
   useEffect(() => {
-    switchFont(["We", "Gallery", "Gigs", "Contact"]);
+    switchFont(["We", "Gallery", "VierVorZwoelf", "Gigs", "Contact"]);
     timeoutRef.current = window.setTimeout(() => {
       if (intervalRef.current !== null) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
       }
-      setNavItems(["We", "Gallery", "Gigs", "Contact"]);
+      setNavItems(["We", "Gallery", "VierVorZwoelf", "Gigs", "Contact"]);
     }, 1000);
 
     return () => {
@@ -76,23 +78,16 @@ export const Menubar = () => {
   }, []);
 
   return (
-    <div className="menubar__main">
-      <div className="bandLogo">
-        <Image
-          className="bandLogo__img"
-          width={55}
-          height={55}
-          alt="band logo"
-          src="/logo.webp"
-        />
-      </div>
+    <div id="menubar" className="menubar__main">
       <div className="menubar__nav__wrapper">
         <ul>
           {navItems.map((item, i) => (
-            <li key={i}>{item}</li>
+            <Link className={`menu-nav-li__${i}`} href={navLinks[i]} key={i}>
+              <li>{item}</li>
+            </Link>
           ))}
-          <AccountDropdown />
         </ul>
+        <AccountDropdown />
       </div>
     </div>
   );

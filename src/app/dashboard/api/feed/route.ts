@@ -1,5 +1,3 @@
-import axiosPublic from "@/utils/axiosPublic"
-
 export async function GET() {
   try {
     const response = await fetch("https://api.restful-api.dev/objects")

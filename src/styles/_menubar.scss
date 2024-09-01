@@ -3,11 +3,13 @@
 
 .menubar {
   &__main {
-    display: grid;
-    grid-template-columns: 100px 1fr;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: end;
     height: 70px;
-    place-items: end;
-    padding: 0 20px 10px;
+    background-color: rgba(255, 255, 255, 0);
+    font-weight: 600;
     @include S {
       grid-template-columns: 70px 1fr;
     }
@@ -18,9 +20,7 @@
       flex-direction: row;
       justify-content: end;
       & li {
-        margin: 0px 25px;
         transition: 0.15s ease-in;
-        font-size: 1.2rem;
         @include S {
           margin: 0px 10px;
         }
@@ -33,6 +33,41 @@
   }
 }
 
-.bandLogo__img {
+.menubar__account__icon {
+  position: absolute;
+  right: 25px;
+  top: 20px;
+  transition: 0.15s;
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+}
+
+.menu-nav-li__0,
+.menu-nav-li__1,
+.menu-nav-li__3,
+.menu-nav-li__4 {
+  font-size: 1.2rem;
+  color: white;
+  display: flex;
+  align-items: end;
+  margin: 0px 25px;
+}
+
+.menu-nav-li__2 {
+  font-size: 2.4rem;
+  color: white;
+  margin: 0px 50px;
+}
+
+.menubar--dashboard {
+  background-color: white;
+  & li {
+    color: darken($primary-orange, 50%);
+  }
+}
+.menubar__account__dropdown--dashboard {
+  background-color: darken($primary-orange, 50%);
   border-radius: 50%;
 }

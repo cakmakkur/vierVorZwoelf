@@ -39,6 +39,7 @@ export default function Login({ setDropdownState }: propTypes) {
       redirect: false,
       username,
       password,
+      // stayLoggedIn,
     });
 
     if (result?.error) {
@@ -83,6 +84,16 @@ export default function Login({ setDropdownState }: propTypes) {
             Password
           </span>
         </label>
+        {/* <label htmlFor="remember" className="login__label">
+          <input
+            type="checkbox"
+            id="subscribe"
+            name="subscribe"
+            checked={stayLoggedIn}
+            onChange={(e) => setStayLoggedIn((prev) => !prev)}
+          />{" "}
+          Stay logged in
+        </label> */}
         {error && <span className="error__message__span">{error}</span>}
         <button className="account__form__button" type="submit">
           Login
