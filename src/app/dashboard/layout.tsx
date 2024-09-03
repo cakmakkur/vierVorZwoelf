@@ -29,17 +29,19 @@ export default function RootLayout({ children, feed }: PropTypes) {
   }, [session]);
 
   // Not authorized to access the dashboard
-  if (!session || session.user.role !== "Admin") {
-    useEffect(() => {
+  useEffect(() => {
+    if (!session || session.user.role !== "Admin") {
       timeoutRef.current = setTimeout(() => {
         window.location.href = "/";
       }, 2000);
-      return () => {
-        if (timeoutRef.current) {
-          clearTimeout(timeoutRef.current);
-        }
-      };
-    }, []);
+    }
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [session]);
+  if (!session || session.user.role !== "Admin") {
     return (
       <div
         style={{

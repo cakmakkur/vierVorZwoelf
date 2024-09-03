@@ -1,7 +1,7 @@
 @import "responsive";
 
 .dashboard__main {
-  width: 100vw;
+  width: 100%;
   height: calc(100vh - 120px);
   display: grid;
   grid-template-columns: 180px 1fr 280px;

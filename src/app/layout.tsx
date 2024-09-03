@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./main.css";
 import { Menubar } from "../components/Menubar";
 import SessionWrapper from "@/utils/SessionWrapper";
+import { HomepageProvider } from "@/utils/HomepageContext";
 
 export const metadata: Metadata = {
   title: "Vier vor Zwölf",
@@ -16,14 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="image-background">
-          <div className="image-background-overlay">
-            <SessionWrapper>
-              <Menubar />
-              {children}
-            </SessionWrapper>
-          </div>
-        </div>
+        <SessionWrapper>
+          <HomepageProvider>
+            <Menubar />
+            {children}
+          </HomepageProvider>
+        </SessionWrapper>
       </body>
     </html>
   );

@@ -1,10 +1,17 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import AccountDropdown from "@/components/menubar_components/AccountDropdown";
 import Link from "next/link";
+import { useHomepageContext } from "@/utils/HomepageContext";
 
 export const Menubar = () => {
+  const { toggleShowGigs } = useHomepageContext();
+
+  const handleClick = () => {
+    toggleShowGigs();
+  };
+
   const intervalRef = useRef<number | null>(null);
   const timeoutRef = useRef<number | null>(null);
   const controllerRef = useRef<number | null>(null);
@@ -16,7 +23,7 @@ export const Menubar = () => {
     "Gigs",
     "Contact",
   ]);
-  const navLinks = ["we", "gallery", "/", "gigs", "contact"];
+  const navLinks = ["we", "gallery", "/", "/", "contact"];
 
   const randomChar = (): String => {
     const chars2 = ["a", "b", "c", "d", "e", "f", "p", "h", "z", "m", "k"];
@@ -83,7 +90,7 @@ export const Menubar = () => {
         <ul>
           {navItems.map((item, i) => (
             <Link className={`menu-nav-li__${i}`} href={navLinks[i]} key={i}>
-              <li>{item}</li>
+              <li onClick={handleClick}>{item}</li>
             </Link>
           ))}
         </ul>
