@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from "react";
 import { ObjectId } from "mongoose";
 import ClipLoader from "react-spinners/ClipLoader";
 import Image from "next/image";
-import { send } from "process";
+// import { send } from "process";
 
 interface Mail {
   _id: ObjectId;

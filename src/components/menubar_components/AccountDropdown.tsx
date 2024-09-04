@@ -19,7 +19,7 @@ export default function AccountDropdown() {
 
   useEffect(() => {
     if (session) {
-      console.log("session", session.user);
+      // console.log("session", session.user);
       const expiresAt = new Date(session.expires).getTime();
       const now = Date.now();
       if (now >= expiresAt) {
