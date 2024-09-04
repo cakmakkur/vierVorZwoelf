@@ -1,5 +1,5 @@
 import connectToDatabase from "@/lib/mongodb";
-import Mail from "@/models/mail";
+import Mail from "@/models/Mail";
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
