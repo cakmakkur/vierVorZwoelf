@@ -22,7 +22,6 @@ export default function Home() {
             height={300}
           />
         </div>
-
         <Image
           src="/insta_icon.jpeg"
           alt="insta-icon"
