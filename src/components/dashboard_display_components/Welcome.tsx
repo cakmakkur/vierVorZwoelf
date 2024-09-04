@@ -22,7 +22,7 @@ export default function Welcome() {
   }, []);
 
   return (
-    <div className="display__component display__component--welcome">
+    <div className="display__component--welcome">
       <div className="welcome-anm-div__whitespace"></div>
       <div ref={welcomeAnmDiv} className="welcome-anm-div">
         <div className="welcome-anm-div__back">
