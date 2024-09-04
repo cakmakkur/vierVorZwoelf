@@ -13,3 +13,18 @@
 @import "mainPage";
 @import "gallery";
 @import "gigs";
+
+.home__social-links {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  column-gap: 40px;
+  position: absolute;
+  bottom: 40px;
+}
+
+.social__icon__wrapper {
+  position: relative;
+  perspective: 300px;
+  transform-style: preserve-3d;
+}

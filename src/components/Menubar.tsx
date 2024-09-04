@@ -8,10 +8,6 @@ import { useHomepageContext } from "@/utils/HomepageContext";
 export const Menubar = () => {
   const { toggleShowGigs } = useHomepageContext();
 
-  const handleClick = () => {
-    toggleShowGigs();
-  };
-
   const intervalRef = useRef<number | null>(null);
   const timeoutRef = useRef<number | null>(null);
   const controllerRef = useRef<number | null>(null);
@@ -88,11 +84,21 @@ export const Menubar = () => {
     <div id="menubar" className="menubar__main">
       <div className="menubar__nav__wrapper">
         <ul>
-          {navItems.map((item, i) => (
-            <Link className={`menu-nav-li__${i}`} href={navLinks[i]} key={i}>
-              <li onClick={handleClick}>{item}</li>
-            </Link>
-          ))}
+          <Link className={"menu-nav-li__0"} href={navLinks[0]}>
+            <li>{navItems[0]}</li>
+          </Link>
+          <Link className={"menu-nav-li__1"} href={navLinks[1]}>
+            <li>{navItems[1]}</li>
+          </Link>
+          <Link className={"menu-nav-li__2"} href={navLinks[2]}>
+            <li>{navItems[2]}</li>
+          </Link>
+          <Link className={"menu-nav-li__3"} href={navLinks[3]}>
+            <li onClick={() => toggleShowGigs()}>{navItems[3]}</li>
+          </Link>
+          <Link className={"menu-nav-li__4"} href={navLinks[4]}>
+            <li>{navItems[4]}</li>
+          </Link>
         </ul>
         <AccountDropdown />
       </div>

@@ -1708,7 +1708,8 @@ input:focus {
   width: 300px;
   height: 350px;
   border-radius: 10px;
-  background-color: black;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(150deg, rgb(0, 0, 0) 38%, rgb(2, 2, 2) 40%, rgb(52, 52, 52) 100%);
   box-shadow: 1px 1px 13px 2px rgba(255, 255, 255, 0.499);
   display: grid;
   grid-template-rows: 220px 1fr;
@@ -1771,7 +1772,8 @@ input:focus {
   height: 80px;
   width: 300px;
   border-radius: 10px;
-  background-color: black;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(150deg, rgb(0, 0, 0) 38%, rgb(2, 2, 2) 40%, rgb(52, 52, 52) 100%);
   box-shadow: 1px 1px 13px 2px rgba(255, 255, 255, 0.499);
   padding: 10px;
   column-gap: 15px;
@@ -1810,4 +1812,18 @@ input:focus {
   100% {
     transform: translateX(0);
   }
+}
+.home__social-links {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  column-gap: 40px;
+  position: absolute;
+  bottom: 40px;
+}
+
+.social__icon__wrapper {
+  position: relative;
+  perspective: 300px;
+  transform-style: preserve-3d;
 }
