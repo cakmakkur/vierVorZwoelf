@@ -1,9 +1,67 @@
+@import "variables";
+
 .gigs__main-div {
   color: white;
   height: calc(100vh - 90px);
   padding: 20vh 8vw 5vh;
   display: flex;
   justify-content: space-between;
+}
+
+.gig_title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: transparent;
+  background: rgb(255, 184, 61);
+  background: linear-gradient(
+    150deg,
+    rgba(255, 184, 61, 1) 51%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 200% 200%;
+}
+
+.next-gig-title {
+  //for animation
+  transition: 0.2s;
+  transform: translateX(-500px);
+}
+
+@keyframes background-swing {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 200% 0%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.gig_div_title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: transparent;
+  background: rgb(255, 184, 61);
+  background: linear-gradient(
+    150deg,
+    rgba(255, 184, 61, 1) 51%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 200% 200%;
+}
+
+.upcoming-gig-title {
+  //for animation
+  transition: 0.2s;
+  transform: translateX(500px);
 }
 
 .next-gig {

@@ -84,6 +84,7 @@
   & textarea {
     height: 180px;
     color: white;
+    resize: none;
   }
   & button {
     background-color: $primary-orange;

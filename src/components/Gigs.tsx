@@ -6,6 +6,8 @@ import { useRef } from "react";
 
 export default function Gigs() {
   const nextGigRef = useRef<HTMLDivElement>(null);
+  const nextGigTitleRef = useRef<HTMLDivElement>(null);
+  const upcomingGigTitleRef = useRef<HTMLDivElement>(null);
   const upcomingGig1Ref = useRef<HTMLDivElement>(null);
   const upcomingGig2Ref = useRef<HTMLDivElement>(null);
   const upcomingGig3Ref = useRef<HTMLDivElement>(null);
@@ -17,6 +19,8 @@ export default function Gigs() {
   useEffect(() => {
     if (
       !nextGigRef.current ||
+      !nextGigTitleRef.current ||
+      !upcomingGigTitleRef.current ||
       !upcomingGig1Ref.current ||
       !upcomingGig2Ref.current ||
       !upcomingGig3Ref.current ||
@@ -26,27 +30,34 @@ export default function Gigs() {
       !upcomingGig3InfoRef.current
     )
       return;
+    nextGigTitleRef.current.style.animation =
+      "come-in-view 200ms ease-in-out forwards, background-swing 3s ease-in-out infinite";
     nextGigRef.current.style.animation =
-      "come-in-view 200ms ease-in-out forwards";
-    upcomingGig1Ref.current.style.animation =
       "come-in-view 200ms ease-in-out forwards 200ms";
-    upcomingGig2Ref.current.style.animation =
-      "come-in-view 200ms ease-in-out forwards 400ms";
-    upcomingGig3Ref.current.style.animation =
+    upcomingGigTitleRef.current.style.animation =
+      "come-in-view 200ms ease-in-out forwards 400ms, background-swing 3s ease-in-out infinite";
+    upcomingGig1Ref.current.style.animation =
       "come-in-view 200ms ease-in-out forwards 600ms";
+    upcomingGig2Ref.current.style.animation =
+      "come-in-view 200ms ease-in-out forwards 800ms";
+    upcomingGig3Ref.current.style.animation =
+      "come-in-view 200ms ease-in-out forwards 1000ms";
     nextGigInfoRef.current.style.animation =
-      "bring-text-in-view 300ms ease-in-out forwards 900ms";
+      "bring-text-in-view 300ms ease-in-out forwards 1300ms";
     upcomingGig1InfoRef.current.style.animation =
-      "bring-text-in-view 300ms ease-in-out forwards 900ms";
+      "bring-text-in-view 300ms ease-in-out forwards 1300ms";
     upcomingGig2InfoRef.current.style.animation =
-      "bring-text-in-view 300ms ease-in-out forwards 900ms";
+      "bring-text-in-view 300ms ease-in-out forwards 1300ms";
     upcomingGig3InfoRef.current.style.animation =
-      "bring-text-in-view 300ms ease-in-out forwards 900ms";
+      "bring-text-in-view 300ms ease-in-out forwards 1300ms";
   }, []);
 
   return (
     <div className="gigs__main-div">
       <div>
+        <div ref={nextGigTitleRef} className="next-gig-title gig_title ">
+          Next gig
+        </div>
         <div ref={nextGigRef} className="next-gig">
           <Image
             className="next-gig__img"
@@ -71,6 +82,9 @@ export default function Gigs() {
         </div>
       </div>
       <div className="gigs__main-div__right">
+        <div ref={upcomingGigTitleRef} className="upcoming-gig-title gig_title">
+          Upcoming...
+        </div>
         <div ref={upcomingGig1Ref} className="upcoming-gig">
           <Image
             className="next-gig__img"

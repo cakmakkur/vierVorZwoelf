@@ -30,6 +30,7 @@ export default function Home() {
         <div className="social-card" id="social__top__insta"></div>
         <div className="social-card" id="social__bottom"></div>
       </div>
+      <div className="footer">&copy; Kursat Cakmak</div>
     </main>
   );
 }
