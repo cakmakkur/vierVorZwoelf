@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function Gigs() {
   const nextGigRef = useRef<HTMLDivElement>(null);
@@ -15,6 +15,11 @@ export default function Gigs() {
   const upcomingGig1InfoRef = useRef<HTMLDivElement>(null);
   const upcomingGig2InfoRef = useRef<HTMLDivElement>(null);
   const upcomingGig3InfoRef = useRef<HTMLDivElement>(null);
+  const [loadedImages, setLoadedImages] = useState<number>(0);
+
+  const handleLoadedImage = () => {
+    setLoadedImages((prev) => prev + 1);
+  };
 
   useEffect(() => {
     if (
@@ -30,6 +35,8 @@ export default function Gigs() {
       !upcomingGig3InfoRef.current
     )
       return;
+    // wait for the images to load
+    if (loadedImages < 4) return;
     nextGigTitleRef.current.style.animation =
       "come-in-view 200ms ease-in-out forwards, background-swing 3s ease-in-out infinite";
     nextGigRef.current.style.animation =
@@ -50,7 +57,7 @@ export default function Gigs() {
       "bring-text-in-view 300ms ease-in-out forwards 1300ms";
     upcomingGig3InfoRef.current.style.animation =
       "bring-text-in-view 300ms ease-in-out forwards 1300ms";
-  }, []);
+  }, [loadedImages]);
 
   return (
     <div className="gigs__main-div">
@@ -60,6 +67,7 @@ export default function Gigs() {
         </div>
         <div ref={nextGigRef} className="next-gig">
           <Image
+            onLoad={handleLoadedImage}
             className="next-gig__img"
             src="/gigs/gig1.webp"
             alt="gig-1"
@@ -87,6 +95,7 @@ export default function Gigs() {
         </div>
         <div ref={upcomingGig1Ref} className="upcoming-gig">
           <Image
+            onLoad={handleLoadedImage}
             className="next-gig__img"
             src="/gigs/gig2.webp"
             alt="gig-2"
@@ -110,6 +119,7 @@ export default function Gigs() {
         </div>
         <div ref={upcomingGig2Ref} className="upcoming-gig">
           <Image
+            onLoad={handleLoadedImage}
             className="next-gig__img"
             src="/gigs/gig3.webp"
             alt="gig-2"
@@ -133,6 +143,7 @@ export default function Gigs() {
         </div>
         <div ref={upcomingGig3Ref} className="upcoming-gig">
           <Image
+            onLoad={handleLoadedImage}
             className="next-gig__img"
             src="/gigs/gig4.webp"
             alt="gig-2"
