@@ -1,0 +1,8 @@
+Model Information:
+* title:	grand piano
+* source:	https://sketchfab.com/3d-models/grand-piano-de9530d9b5cd4326b7d7829c2d3823a8
+* author:	B4Visuals (https://sketchfab.com/B4Visuals)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

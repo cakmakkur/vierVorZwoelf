@@ -1,0 +1,8 @@
+Model Information:
+* title:	LJAS - Bass & Amp
+* source:	https://sketchfab.com/3d-models/ljas-bass-amp-5c9221fcf7ed41c1975c8d87fc347d1e
+* author:	La Jarre à Son (https://sketchfab.com/la_jarre_a_son)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

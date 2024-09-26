@@ -1,0 +1,8 @@
+Model Information:
+* title:	Generic Electronic Guitar
+* source:	https://sketchfab.com/3d-models/generic-electronic-guitar-1eb88445135842efa221ce24d63b2fec
+* author:	assetfactory (https://sketchfab.com/assetfactory)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

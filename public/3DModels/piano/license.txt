@@ -1,0 +1,8 @@
+Model Information:
+* title:	Piano - musical instrument
+* source:	https://sketchfab.com/3d-models/piano-musical-instrument-08ee4f604487442e9f47a0c316f1c6b3
+* author:	assetfactory (https://sketchfab.com/assetfactory)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
