@@ -19,7 +19,7 @@ export const Menubar = () => {
     "Gigs",
     "Contact",
   ]);
-  const navLinks = ["we", "gallery", "/", "/", "contact"];
+  const navLinks = ["we", "gallery", "/", "/", "/contact"];
 
   const randomChar = (): String => {
     const chars2 = ["a", "b", "c", "d", "e", "f", "p", "h", "z", "m", "k"];

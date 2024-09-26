@@ -12,23 +12,24 @@ export default function Home() {
         <div className="image-background-overlay"></div>
       </div>
       {showGigs && <Gigs />}
-      {/* <div className="home__social-links">
-        <div className="social__icon__wrapper">
-          <Image
-            className="social__icon__img"
-            src="/fb_icon.jpeg"
-            alt="fb-icon"
-            width={300}
-            height={300}
-          />
+      <div className="social-links__container fb">
+        <div className="social-card" id="social__front">
+          <Image src="/fb_icon.jpeg" alt="Facebook" width={50} height={50} />
         </div>
-        <Image
-          src="/insta_icon.jpeg"
-          alt="insta-icon"
-          width={300}
-          height={300}
-        />
-      </div> */}
+        <div className="social-card" id="social__left__fb"></div>
+        <div className="social-card" id="social__right"></div>
+        <div className="social-card" id="social__top__fb"></div>
+        <div className="social-card" id="social__bottom"></div>
+      </div>
+      <div className="social-links__container insta">
+        <div className="social-card" id="social__front">
+          <Image src="/insta_icon.jpeg" alt="Facebook" width={50} height={50} />
+        </div>
+        <div className="social-card" id="social__left__insta"></div>
+        <div className="social-card" id="social__right"></div>
+        <div className="social-card" id="social__top__insta"></div>
+        <div className="social-card" id="social__bottom"></div>
+      </div>
     </main>
   );
 }

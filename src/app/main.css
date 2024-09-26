@@ -798,6 +798,7 @@ input:focus {
   column-gap: 15px;
 }
 .bandMails__display__sender {
+  position: relative;
   font-weight: 600;
   border-bottom: 1px solid rgba(0, 0, 0, 0.233);
   padding-bottom: 15px;
@@ -988,6 +989,54 @@ input:focus {
 
 .inbox--mailSelected {
   transform: translateX(calc(-50% - 15px));
+}
+
+.mails_del_btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.mails_del_btn img {
+  transition: 0.15s;
+}
+.mails_del_btn img:hover {
+  transform: scale(1.15);
+}
+
+.mails_del_confirmBox {
+  font-weight: 600;
+  position: absolute;
+  top: -3px;
+  right: 0;
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: rgb(255, 255, 246);
+  width: 150px;
+  transition: 0.15s;
+  text-align: center;
+  padding: 5px;
+  z-index: 1000;
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  cursor: default;
+}
+.mails_del_confirmBox button {
+  margin: 5px 5px;
+  cursor: pointer;
+  border: 1px solid black;
+  transition: 0.15s;
+}
+.mails_del_confirmBox button:nth-child(2):hover {
+  background-color: rgb(206, 255, 206);
+}
+.mails_del_confirmBox button:nth-child(3):hover {
+  background-color: rgba(255, 0, 0, 0.403);
+}
+.mails_del_confirmBox_delMail--active {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .sliderbar__container {
@@ -1612,6 +1661,99 @@ input:focus {
   background: linear-gradient(0deg, rgba(255, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 61%);
 }
 
+.social-links__container {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  color: white;
+  scale: 0.13;
+  animation: social-card-animation 5s cubic-bezier(0.49, 0.69, 0.61, 0.55) infinite;
+  transition: 0.2s;
+}
+.social-links__container:hover {
+  scale: 0.2;
+  cursor: pointer;
+}
+
+.fb {
+  left: calc(50vw - 80px);
+}
+
+.insta {
+  right: calc(50vw - 80px);
+}
+
+.social-card {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+#social__front {
+  left: 0px;
+  transform: translateZ(125px);
+}
+#social__front img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+#social__top__fb {
+  top: -125px;
+  transform: rotateX(-90deg);
+  background-color: rgb(70, 154, 240);
+}
+
+#social__left__fb {
+  left: -125px;
+  transform: rotateY(90deg);
+  background-color: rgb(42, 99, 215);
+}
+
+#social__top__insta {
+  top: -125px;
+  transform: rotateX(-90deg);
+  background-color: white;
+}
+
+#social__left__insta {
+  left: -125px;
+  transform: rotateY(90deg);
+  background-color: rgb(238, 238, 238);
+}
+
+#social__right {
+  right: -125px;
+  transform: rotateY(-90deg);
+}
+
+#social__bottom {
+  bottom: -125px;
+  transform: rotateX(90deg);
+}
+
+@keyframes social-card-animation {
+  0% {
+    transform: rotateX(-20deg) rotateY(15deg) rotateZ(10deg);
+  }
+  50% {
+    transform: rotateX(-20deg) rotateY(25deg) rotateZ(20deg);
+  }
+  100% {
+    transform: rotateX(-20deg) rotateY(15deg) rotateZ(10deg);
+  }
+}
 .gallery__background {
   z-index: -2;
   width: 100vw;
@@ -1680,7 +1822,7 @@ input:focus {
 }
 @media (max-width: 860px) {
   .gallery__gridbox__image:nth-child(3n+1) {
-    grid-column: 2/2 span;
+    grid-column: 2/span;
   }
 }
 .gallery__gridbox__image:not(:hover) {
@@ -1822,17 +1964,107 @@ input:focus {
     transform: translateX(0);
   }
 }
-.home__social-links {
+.contact__page__main {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100vh;
+  background-color: black;
+  z-index: -2;
+  padding-top: 150px;
   display: flex;
   justify-content: center;
-  column-gap: 40px;
-  position: absolute;
-  bottom: 40px;
+  column-gap: 10vw;
 }
 
-.social__icon__wrapper {
+.sentSuccessfully {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  row-gap: 100px;
+}
+.sentSuccessfully h3 {
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+  color: rgba(255, 184, 61, 0.717);
+}
+.sentSuccessfully h3 img {
+  display: inline;
+  width: 30px;
+}
+
+.contact__form__div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  row-gap: 15px;
+}
+.contact__form__div h1 {
+  color: rgba(255, 184, 61, 0.717);
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.contact__form__div h6 {
+  color: red;
+}
+.contact__form__div input, .contact__form__div textarea {
+  background-color: black;
+  border: 1px solid rgba(255, 184, 61, 0.717);
+  width: 300px;
+  color: rgba(255, 184, 61, 0.717);
+  padding-left: 10px;
+}
+.contact__form__div input::placeholder, .contact__form__div textarea::placeholder {
+  color: rgba(255, 184, 61, 0.717);
+}
+.contact__form__div input {
+  height: 35px;
+  color: white;
+}
+.contact__form__div textarea {
+  height: 180px;
+  color: white;
+}
+.contact__form__div button {
+  background-color: rgba(255, 184, 61, 0.717);
+}
+
+.contact__label {
   position: relative;
-  perspective: 300px;
-  transform-style: preserve-3d;
+}
+
+.form__phc__text {
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  color: rgba(255, 184, 61, 0.717);
+  transition: 0.3s;
+}
+
+.form__phc__text--active {
+  top: -8px;
+  background-color: black;
+  padding: 0px 4px;
+  font-size: 0.7rem;
+}
+
+.contact__info__div {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  row-gap: 1vh;
+  color: rgba(255, 184, 61, 0.717);
+}
+.contact__info__div h2 {
+  color: rgba(255, 184, 61, 0.717);
+}
+
+.ext__links__div--contact {
+  margin-top: 15px;
+  justify-content: start;
 }

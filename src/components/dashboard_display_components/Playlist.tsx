@@ -51,6 +51,7 @@ const Playlist = () => {
       }
       setPlaylists(data);
     } catch (err) {
+      setHasFetchFailed(true);
       console.error(err);
     } finally {
       setIsLoading(false);

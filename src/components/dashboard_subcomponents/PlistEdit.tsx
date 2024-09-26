@@ -298,7 +298,7 @@ export default function PlistEdit({
               {toggledSong === song ? (
                 <div className="plistEdit__song__del">
                   <Image
-                    alt="arrow down"
+                    alt="delete playlist"
                     width={22}
                     height={22}
                     src="/trash_bin-r.png"

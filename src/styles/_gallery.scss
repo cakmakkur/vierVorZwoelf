@@ -69,7 +69,7 @@
   }
   @include S {
     &:nth-child(3n + 1) {
-      grid-column: 2 / 2 span;
+      grid-column: 2 / span;
     }
   }
   &:not(:hover) {

@@ -40,6 +40,7 @@
   grid-template-columns: 200px 1fr;
   column-gap: 15px;
   &__sender {
+    position: relative;
     font-weight: 600;
     border-bottom: 1px solid rgba(0, 0, 0, 0.233);
     padding-bottom: 15px;
@@ -242,4 +243,56 @@
 
 .inbox--mailSelected {
   transform: translateX(calc(-50% - 15px));
+}
+
+.mails_del_btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  & img {
+    transition: 0.15s;
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+}
+
+.mails_del_confirmBox {
+  font-weight: 600;
+  position: absolute;
+  top: -3px;
+  right: 0;
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: rgb(255, 255, 246);
+  width: 150px;
+  transition: 0.15s;
+  text-align: center;
+  padding: 5px;
+  z-index: 1000;
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  cursor: default;
+  & button {
+    margin: 5px 5px;
+    cursor: pointer;
+    border: 1px solid black;
+    transition: 0.15s;
+    &:nth-child(2) {
+      &:hover {
+        background-color: rgb(206, 255, 206);
+      }
+    }
+    &:nth-child(3) {
+      &:hover {
+        background-color: rgba(255, 0, 0, 0.403);
+      }
+    }
+  }
+  &_delMail--active {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
 }

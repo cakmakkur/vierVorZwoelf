@@ -1,0 +1,126 @@
+@import "variables";
+
+.contact__page__main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  z-index: -2;
+  padding-top: 150px;
+
+  display: flex;
+  justify-content: center;
+  // padding: 10vh 5vw 5vh;
+  column-gap: 10vw;
+  // box-shadow: inset -0px 0px 15px 3px black;
+  // border-radius: 10px;
+  // @include adjustContact-small {
+  //   flex-direction: column;
+  //   align-items: center;
+  //   margin-top: 10vh;
+  //   height: 100vh;
+  // }
+}
+
+.sentSuccessfully {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  row-gap: 100px;
+  // @include adjustImage-small {
+  //   row-gap: 50px;
+  // }
+  & h3 {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+    color: $primary-orange;
+    // @include adjustImage-small {
+    //   font-size: 1rem;
+    // }
+    & img {
+      display: inline;
+      width: 30px;
+    }
+  }
+}
+
+.contact__form__div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  row-gap: 15px;
+  & h1 {
+    color: $primary-orange;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    // @include adjustContact-small {
+    //   font-size: 2rem;
+    // }
+  }
+  & h6 {
+    color: red;
+  }
+  & input,
+  & textarea {
+    background-color: black;
+    border: 1px solid $primary-orange;
+    width: 300px;
+    color: $primary-orange;
+    padding-left: 10px;
+    &::placeholder {
+      color: $primary-orange;
+    }
+  }
+  & input {
+    height: 35px;
+    color: white;
+  }
+  & textarea {
+    height: 180px;
+    color: white;
+  }
+  & button {
+    background-color: $primary-orange;
+  }
+}
+
+.contact__label {
+  position: relative;
+}
+
+.form__phc__text {
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  color: $primary-orange;
+  transition: 0.3s;
+}
+
+.form__phc__text--active {
+  top: -8px;
+  background-color: black;
+  padding: 0px 4px;
+  font-size: 0.7rem;
+}
+
+.contact__info__div {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  row-gap: 1vh;
+  color: $primary-orange;
+  & h2 {
+    color: $primary-orange;
+  }
+}
+
+.ext__links__div--contact {
+  margin-top: 15px;
+  justify-content: start;
+}

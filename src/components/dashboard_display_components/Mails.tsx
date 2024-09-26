@@ -2,15 +2,12 @@ import Sliderbar from "@/utils/Sliderbar";
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import MailsDisplay from "../dashboard_subcomponents/MailsDisplay";
-
-import fakeMails from "@/utils/tempBandMails.json";
+import BandMailsDisplay from "../dashboard_subcomponents/BandMailsDisplay";
 
 const Mails = () => {
   const selectorRef = useRef<HTMLDivElement>(null);
   const [selectedOption, setSelectedOption] = useState<string>("New Mail");
-  const [selectedBandMail, setSelectedBandMail] = useState<string | undefined>(
-    undefined
-  );
+
   const [isPersonal, setIsPersonal] = useState<boolean>(true);
 
   // set the display back to "new mail" after switching between personal and band
@@ -20,10 +17,6 @@ const Mails = () => {
 
   const handleClick = (component: string) => {
     setSelectedOption(component);
-  };
-
-  const handleClick2 = (mail: string) => {
-    setSelectedBandMail(mail);
   };
 
   useEffect(() => {
@@ -72,40 +65,7 @@ const Mails = () => {
           <MailsDisplay selectedOption={selectedOption} />
         </div>
       ) : (
-        <div className="bandMails__display">
-          <div className="mails__sidebar">
-            <ul>
-              {fakeMails.map((mail, i) => {
-                return (
-                  <li
-                    className="bandMails__display__li"
-                    onClick={() => handleClick2(mail.id)}
-                    key={i}
-                  >
-                    <span> {mail.sender}</span>
-                    <br />
-                    <span style={{ fontWeight: "600" }}> {mail.subject}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          {fakeMails.map((m) => {
-            if (m.id === selectedBandMail) {
-              return (
-                <div key={m.id} className="bandMails__display__main">
-                  <div className="bandMails__display__sender">
-                    From: <span>{m.sender}</span>
-                  </div>
-                  <div className="bandMails__display__message">{m.message}</div>
-                </div>
-              );
-            } else {
-              return "";
-            }
-          })}
-        </div>
+        <BandMailsDisplay />
       )}
     </div>
   );
