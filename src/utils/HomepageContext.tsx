@@ -8,7 +8,7 @@ interface HomepageContextProps {
 
 type HomepageContextType = {
   showGigs: boolean;
-  toggleShowGigs: () => void;
+  toggleShowGigs: (s: boolean) => void;
 };
 
 const HomepageContext = createContext<HomepageContextType | undefined>(
@@ -18,8 +18,8 @@ const HomepageContext = createContext<HomepageContextType | undefined>(
 export const HomepageProvider = ({ children }: HomepageContextProps) => {
   const [showGigs, setShowGigs] = useState(false);
 
-  const toggleShowGigs = () => {
-    setShowGigs(true);
+  const toggleShowGigs = (s: boolean) => {
+    setShowGigs(s);
   };
   const value: HomepageContextType = { showGigs, toggleShowGigs };
 

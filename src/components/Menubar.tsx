@@ -91,10 +91,10 @@ export const Menubar = () => {
             <li>{navItems[1]}</li>
           </Link>
           <Link className={"menu-nav-li__2"} href={navLinks[2]}>
-            <li>{navItems[2]}</li>
+            <li onClick={() => toggleShowGigs(false)}>{navItems[2]}</li>
           </Link>
           <Link className={"menu-nav-li__3"} href={navLinks[3]}>
-            <li onClick={() => toggleShowGigs()}>{navItems[3]}</li>
+            <li onClick={() => toggleShowGigs(true)}>{navItems[3]}</li>
           </Link>
           <Link className={"menu-nav-li__4"} href={navLinks[4]}>
             <li>{navItems[4]}</li>
