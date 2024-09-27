@@ -21,6 +21,11 @@ export default function Page() {
   const drumsRef = useRef(null);
   const pianoRef = useRef(null);
 
+  // IN DEVELOPMENT WARNING
+  useEffect(() => {
+    alert("This part is still in development. Please be patient.");
+  }, []);
+
   // useEffect(() => {
   //   window.addEventListener('resize', function() {
   //     camera.aspect = window.innerWidth / window.innerHeight;
