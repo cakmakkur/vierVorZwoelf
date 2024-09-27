@@ -2089,9 +2089,6 @@ input:focus {
   color: white;
   resize: none;
 }
-.contact__form__div button {
-  background-color: rgba(255, 184, 61, 0.717);
-}
 
 .contact__label {
   position: relative;
@@ -2126,6 +2123,74 @@ input:focus {
 .ext__links__div--contact {
   margin-top: 15px;
   justify-content: start;
+}
+
+.contact_button_div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.button__wrapper {
+  border: none;
+  border-radius: 10px;
+  width: 400px;
+  height: 52px;
+  padding: 1px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px 20px;
+  position: relative;
+  transition: 0.3s;
+  overflow: hidden;
+  z-index: 0;
+}
+.button__wrapper::after, .button__wrapper::before {
+  transition: 0.25s ease-in-out;
+  content: "";
+  position: absolute;
+  transform: rotate(60deg);
+}
+.button__wrapper::after {
+  bottom: -70px;
+  left: -320px;
+  width: 300px;
+  height: 400px;
+  background: linear-gradient(to left, white 60%, rgb(255, 255, 123));
+}
+.button__wrapper::before {
+  top: -20px;
+  right: -320px;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(to left, rgb(255, 255, 123) 60%, white);
+}
+
+.button__wrapper--active::after {
+  left: -88px;
+}
+
+.button__wrapper--active::before {
+  right: -50px;
+}
+
+.contact_button {
+  text-align: center;
+  z-index: 1000;
+  border-radius: 8px;
+  border: none;
+  width: 99%;
+  margin: 1px 0px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  transition: 0.3s;
+  box-shadow: inset 0px 0px 12px 2px rgba(0, 0, 0, 0.379);
+  color: white;
+  background-color: rgb(255, 184, 61);
+}
+.contact_button:hover {
+  cursor: pointer;
 }
 
 .we_main_div {

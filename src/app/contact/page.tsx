@@ -13,7 +13,7 @@ export default function ContactPage() {
   const messagePhRef = useRef<HTMLSpanElement>(null);
   const [isHovering, setIsHovering] = useState("");
   const [focus, setFocus] = useState("");
-  const [messageSent, setMessageSent] = useState<boolean>(false);
+  const [messageStatus, setMessageStatus] = useState<string>("initial");
   const [failed, setFailed] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -46,14 +46,10 @@ export default function ContactPage() {
   // CONTACT FX
   useEffect(() => {
     sendMessageRef.current?.classList.remove("button__wrapper--active");
-    if (isHovering === "viewProduct") {
+    if (isHovering === "hover") {
       sendMessageRef.current?.classList.add("button__wrapper--active");
     }
   }, [isHovering]);
-
-  function toggleFxBtn(arg: string) {
-    setIsHovering(arg);
-  }
 
   //REQUEST FORM
   const handleChange = (e: any) => {
@@ -65,6 +61,7 @@ export default function ContactPage() {
     e.preventDefault();
 
     try {
+      setMessageStatus("sending");
       const response = await fetch("/contact/api", {
         method: "POST",
         headers: {
@@ -73,20 +70,24 @@ export default function ContactPage() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        setMessageSent(true);
         setFormData({ name: "", email: "", subject: "", message: "" });
+        setMessageStatus("sent");
       } else {
         setFailed(true);
+        setMessageStatus("initial");
         throw new Error("Failed to send message");
       }
     } catch (error) {
+      setFailed(true);
+      setMessageStatus("initial");
       console.error(error);
+    } finally {
     }
   };
 
   return (
     <div className="contact__page__main">
-      {!messageSent ? (
+      {messageStatus === "initial" || messageStatus === "sending" ? (
         <form className="contact__form__div" onSubmit={handleSubmit}>
           <h1>{"GET IN TOUCH"}</h1>
           <label className="contact__label">
@@ -145,25 +146,24 @@ export default function ContactPage() {
             </span>
           </label>
           {failed ? (
-            <h6>
-              ❌ Nachricht konnte nicht gesendet werden. Bitte später erneut
-              versuchen.
-            </h6>
+            <h6>❌ Message wasn&apos;t sent. Please try again.</h6>
           ) : (
             ""
           )}
-          <div className="view__product__btn__div">
+          <div className="contact_button_div">
             <div
               ref={sendMessageRef}
               onMouseEnter={() => {
-                toggleFxBtn("viewProduct");
+                setIsHovering("hover");
               }}
               onMouseLeave={() => {
-                toggleFxBtn("");
+                setIsHovering("");
               }}
-              className="button__wrapper pr__button__wrapper"
+              className="button__wrapper"
             >
-              <button style={{ paddingTop: "0px" }}>CONTACT US</button>
+              <button className="contact_button">
+                {messageStatus === "initial" ? "CONTACT US" : "sending..."}
+              </button>
             </div>
           </div>
         </form>
@@ -178,21 +178,21 @@ export default function ContactPage() {
             />{" "}
             Message Sent Successfully
           </h3>
-          <div className="view__product__btn__div">
+          <div className="contact_button_div">
             <div
               ref={sendMessageRef}
               onMouseEnter={() => {
-                toggleFxBtn("viewProduct");
+                setIsHovering("hover");
               }}
               onMouseLeave={() => {
-                toggleFxBtn("");
+                setIsHovering("");
               }}
-              className="button__wrapper pr__button__wrapper"
+              className="button__wrapper"
             >
               <button
-                onClick={() => setMessageSent(false)}
+                onClick={() => setMessageStatus("initial")}
                 style={{ paddingTop: "0px" }}
-                className="view__product__btn"
+                className="contact_button"
               >
                 SEND ANOTHER MESSAGE
               </button>
