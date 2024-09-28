@@ -20,13 +20,24 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   await connectToDatabase();
+
+  const sanitize = (input: string) => input.trim().replace(/[^\w\s@.]/gi, "");
+
   try {
     const { name, email, subject, message } = await request.json();
+
+    const sanitizedData = {
+      name: sanitize(name),
+      email: sanitize(email),
+      subject: sanitize(subject),
+      message: sanitize(message),
+    };
+
     const newMail = new BandMail({
-      name,
-      email,
-      subject,
-      message,
+      name: sanitizedData.name,
+      email: sanitizedData.email,
+      subject: sanitizedData.subject,
+      message: sanitizedData.message,
     });
     const savedMail = await newMail.save();
     console.log("New post received");
